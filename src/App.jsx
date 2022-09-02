@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom"
 
 import { HomePage, CreateGame, JoinGame, WaitingRoom, Game, Result, Leaderboard, NotFound } from "./pages"
-
+import { Header, Footer } from "./components"
 const App = () => {
     return <Routes>
                 <Route path="/" element={<><Header /><HomePage /><Footer /></>}></Route>
