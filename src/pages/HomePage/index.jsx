@@ -1,8 +1,9 @@
 import React from 'react'
+import styles from './index.module.css'
 
 function HomePage() {
   return (
-    <div><h1>Welcome to Utility Billionaire!!</h1></div>
+    <div className={styles.root}><h1>Welcome to Utility Billionaire!!</h1></div>
   )
 }
 
