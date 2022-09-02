@@ -1,0 +1,8 @@
+export { default as HomePage } from "./HomePage"
+export { default as CreateGame } from "./CreateGame"
+export { default as JoinGame } from "./JoinGame"
+export { default as WaitingRoom } from "./WaitingRoom"
+export { default as Game } from "./Game"
+export { default as Result } from "./Result"
+export { default as Leaderboard } from "./Leaderboard"
+export { default as NotFound } from "./NotFound"
