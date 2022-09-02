@@ -5,14 +5,14 @@ import { HomePage, CreateGame, JoinGame, WaitingRoom, Game, Result, Leaderboard,
 
 const App = () => {
     return <Routes>
-                <Route path="/" element={<HomePage />}></Route>
-                <Route path="/create" element={<CreateGame />}></Route>
-                <Route path="/join" element={<JoinGame />}></Route>
-                <Route path="/waiting" element={<WaitingRoom />}></Route>
-                <Route path="/game" element={<Game />}></Route>
-                <Route path="/result" element={<Result />}></Route>
-                <Route path="/leaderboard" element={<Leaderboard />}></Route>
-                <Route path="*" element={<NotFound />}></Route>
+                <Route path="/" element={<><Header /><HomePage /><Footer /></>}></Route>
+                <Route path="/create" element={<><Header /><CreateGame /><Footer /></>}></Route>
+                <Route path="/join" element={<><Header /><JoinGame /><Footer /></>}></Route>
+                <Route path="/waiting" element={<><Header /><WaitingRoom /><Footer /></>}></Route>
+                <Route path="/game" element={<><Header /><Game /><Footer /></>}></Route>
+                <Route path="/result" element={<><Header /><Result /><Footer /></>}></Route>
+                <Route path="/leaderboard" element={<><Header /><Leaderboard /><Footer /></>}></Route>
+                <Route path="*" element={<><Header /><NotFound /><Footer /></>}></Route>
             </Routes>
 }
 
