@@ -2,10 +2,10 @@ import React from "react";
 import { Route, Routes } from "react-router-dom"
 
 import { HomePage, CreateGame, JoinGame, WaitingRoom, Game, Result, Leaderboard, NotFound } from "./pages"
-import { Header, Footer } from "./components"
+import { Header, Footer, NavBar } from "./components"
 const App = () => {
     return <Routes>
-                <Route path="/" element={<><Header /><HomePage /><Footer /></>}></Route>
+                <Route path="/" element={<><NavBar /><HomePage /><Footer /></>}></Route>
                 <Route path="/create" element={<><Header /><CreateGame /><Footer /></>}></Route>
                 <Route path="/join" element={<><Header /><JoinGame /><Footer /></>}></Route>
                 <Route path="/waiting" element={<><Header /><WaitingRoom /><Footer /></>}></Route>
