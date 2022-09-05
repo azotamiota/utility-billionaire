@@ -6,13 +6,13 @@ import { Header, Footer, NavBar } from "./components"
 const App = () => {
     return <Routes>
                 <Route path="/" element={<><NavBar /><HomePage /><Footer /></>}></Route>
-                <Route path="/create" element={<><Header /><CreateGame /><Footer /></>}></Route>
-                <Route path="/join" element={<><Header /><JoinGame /><Footer /></>}></Route>
-                <Route path="/waiting" element={<><Header /><WaitingRoom /><Footer /></>}></Route>
-                <Route path="/game" element={<><Header /><Game /><Footer /></>}></Route>
-                <Route path="/result" element={<><Header /><Result /><Footer /></>}></Route>
-                <Route path="/leaderboard" element={<><Header /><Leaderboard /><Footer /></>}></Route>
-                <Route path="*" element={<><Header /><NotFound /><Footer /></>}></Route>
+                <Route path="/create" element={<><NavBar /><CreateGame /><Footer /></>}></Route>
+                <Route path="/join" element={<><NavBar /><JoinGame /><Footer /></>}></Route>
+                <Route path="/waiting" element={<><NavBar /><WaitingRoom /><Footer /></>}></Route>
+                <Route path="/game" element={<><NavBar /><Game /><Footer /></>}></Route>
+                <Route path="/result" element={<><NavBar /><Result /><Footer /></>}></Route>
+                <Route path="/leaderboard" element={<><NavBar /><Leaderboard /><Footer /></>}></Route>
+                <Route path="*" element={<><NavBar /><NotFound /><Footer /></>}></Route>
             </Routes>
 }
 
