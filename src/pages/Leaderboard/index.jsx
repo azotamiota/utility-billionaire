@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import {UserCard} from '../../components'
+import {Container, UserCard, Title} from '../../components'
 import styles from './index.module.css'
 
 function Leaderboard() {
@@ -17,11 +17,13 @@ function Leaderboard() {
     fetchUsers()
   }, [])
 
-  return (
-    <div className={styles.root}><h1>Leaderboard:</h1>
-    {console.log('leaderboard: ', leaderboard)}
-    {leaderboard && leaderboard.slice(0, 11).map(user => <UserCard username={user.username} score={user.score} key={user._id}/>)}
-  </div>
+  return (<>
+    <Container>
+      <Title>Leaderboard:</Title>
+      {console.log('leaderboard: ', leaderboard)}
+      {leaderboard && leaderboard.slice(0, 11).map(user => <UserCard username={user.username} score={user.score} key={user._id}/>)}
+    </Container>
+  </>
   )
 }
 
