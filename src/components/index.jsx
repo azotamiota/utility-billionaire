@@ -8,3 +8,4 @@ export { default as Message } from './Message'
 export { default as Title } from './Title'
 export { default as TotalMoney } from './TotalMoney'
 export { default as UserCard } from './UserCard'
+export { default as Timer } from "./Timer"

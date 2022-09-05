@@ -7,9 +7,9 @@ const NavLinks = () => {
     const navigate = useNavigate()
     return (
             <div className={styles.navLinksContainer}>
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/create">New Game</NavLink>
-                <NavLink to="/leaderboard">Leaderboard</NavLink>
+                <NavLink to="/" className={styles.neonText}>Home</NavLink>
+                <NavLink to="/create" className={styles.neonText}>New Game</NavLink>
+                <NavLink to="/leaderboard" className={styles.neonText}>Leaderboard</NavLink>
             </div>
         
     )
