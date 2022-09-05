@@ -5,3 +5,5 @@ coverage
 dist
 .env
 blueprint-templates
+# Local Netlify folder
+.netlify
