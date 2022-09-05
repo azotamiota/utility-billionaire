@@ -9,10 +9,12 @@ function HomePage() {
   const navigate = useNavigate()
 
   return (
-    <div>
-      <h1>Welcome to Utility Billinaire!</h1>
-      <Button text="Join Game" handleClick={() => navigate("/join")} classVariant="homeButtons"/>
-      <Button text="Create Game" handleClick={() => navigate("/create")} classVariant="homeButtons"/>
+    <div className={styles.outerContainer}>
+      <div className={styles.innerContainer}>
+        <h1>Utility Billionaire</h1>
+        <Button text="Join Game" handleClick={() => navigate("/join")} classVariant={"neonText"}/>
+        <Button text="Create Game" handleClick={() => navigate("/create")} classVariant={"neonText"}/>
+      </div>
     </div>
   )
 }
