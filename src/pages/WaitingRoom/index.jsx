@@ -1,20 +1,18 @@
 import React, {useEffect} from 'react'
-import io from 'socket.io-client';
 import styles from './index.module.css'
+import io from 'socket.io-client';
 
 import { Button, Container, UserCard } from "../../components"
 
-const url = 'https://utility-billionaire.herokuapp.com'    // uncomment that you want to use as backend server
-// const url = 'http://192.168.0.14:5000' 
-
+// const url = 'https://utility-billionaire.herokuapp.com'    // uncomment that you want to use as backend server
+const url = 'http://localhost:5000' 
 const socket = io.connect(url)
-
 
 function WaitingRoom() {
   
-  useEffect(()=> {
-    console.log('sdfas')
-  }, [socket])
+  // useEffect(()=> {
+  //   console.log('sdfas')
+  // }, [socket])
 
   const startGame = () => {
     console.log("this should start the game!")
