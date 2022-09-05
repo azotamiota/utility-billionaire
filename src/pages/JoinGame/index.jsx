@@ -2,18 +2,21 @@ import React from 'react'
 import { Button, Container, Input, Title } from '../../components';
 import styles from './index.module.css'
 
+import { Button, Container, Input} from "../../components"
+
 function JoinGame() {
-  const handleClick = (e) => {
-    e.preventDefault()
-    console.log('this should connect me to the right room')
+
+  const joinGame = () => {
+    console.log("this should join an existing game!")
   }
+
   return (
     <div>
-      <Title>Welcome to Join Game page!!</Title>
+      <h1>Join a game!</h1>
       <Container>
-        <Input type='text' classVariant='light'>Enter Room Name</Input>
-        <Input type='text' classVariant='light'>Choose your username</Input>
-        <Button classVariant='dark' text='Join Room' handleClick={handleClick}></Button>
+        <Input type='text' classVariant='light' name='room' defaultValue=''>Room Name</Input>
+        <Input type='text' classVariant='light' name='room' defaultValue=''>Username</Input>
+        <Button text='Join' handleClick={joinGame} classVariant='dark'/>
       </Container>
     </div>
   )
