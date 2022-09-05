@@ -6,7 +6,7 @@ import MobileNavigation from "./MobileNavigation"
 
 function NavBar() {
     return (
-        <div className={styles.navContainer}>
+        <div role="nav" className={styles.navContainer}>
             <DefaultNavigation />
             <MobileNavigation />
         </div>
