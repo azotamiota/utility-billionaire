@@ -3,7 +3,7 @@ import styles from './index.module.css'
 
 function Button({text, handleClick, classVariant}) {
   return (
-    <button className={classVariant} onClick={handleClick}>{text}</button>
+    <button className={styles[`${classVariant}`]} onClick={handleClick}>{text}</button>
   )
 }
 
