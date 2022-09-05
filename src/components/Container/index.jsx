@@ -3,7 +3,7 @@ import styles from './index.module.css'
 
 function Container({children}) {
   return (
-    <div className={styles.root}>{children}</div>
+    <div role="div" className={styles.root}>{children}</div>
   )
 }
 
