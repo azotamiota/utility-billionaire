@@ -14,7 +14,7 @@ function Input({type, defaultValue, name, classVariant, children}) {
      :
      <>
       <label htmlFor={name}>{children}</label>
-      <input className={styles[`${classVariant}`]} type={type} name={name} defaultValue={defaultValue} id={name}/>
+      <input role="input" className={styles[`${classVariant}`]} type={type} name={name} defaultValue={defaultValue} id={name}/>
      </>
 
   )

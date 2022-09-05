@@ -3,7 +3,7 @@ import styles from './index.module.css'
 
 function TotalMoney({children}) {
   return (
-    <div>{children}</div>
+    <div role="score">{children}</div>
   )
 }
 

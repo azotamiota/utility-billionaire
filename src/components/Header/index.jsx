@@ -3,7 +3,7 @@ import styles from './index.module.css'
 
 function Header() {
   return (
-    <div>Header</div>
+    <div role="header">Header</div>
   )
 }
 
