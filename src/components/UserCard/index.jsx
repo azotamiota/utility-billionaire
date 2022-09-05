@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './index.module.css'
 
-function UserCard({ username, classVariant}) {
+function UserCard({ username, score, classVariant}) {
   return (
     <div role="username" className={styles[`${classVariant}`]}>
-      {username}
+      <span>{username}</span>&nbsp;<span>{score}</span>
     </div>
   )
 }

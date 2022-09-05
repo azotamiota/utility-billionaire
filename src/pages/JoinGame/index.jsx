@@ -1,7 +1,6 @@
 import React from 'react'
+import { Button, Container, Input, Title } from '../../components';
 import styles from './index.module.css'
-
-import { Button, Container, Input} from "../../components"
 
 function JoinGame() {
 
