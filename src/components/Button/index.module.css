@@ -1,5 +1,4 @@
-.dark {
-    width: 20%;
+.dark, .answer {
     margin: auto;
     margin-top: 10px;
     padding: 5px 20px;
@@ -7,5 +6,14 @@
     border: none;
     box-shadow: 2px 2px 0 rgba(152, 42, 130, 0.539);
     min-height: 40px;
+}
+
+.dark {
+    width: 20%;
     background-color: blueviolet;
+}
+
+.answer {
+    width: 60%;
+    background-color: crimson;
 }
