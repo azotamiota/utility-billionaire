@@ -1,23 +1,27 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState } from 'react'
 
-function Timer() {
+const Timer = ({ setTimeOut, questionNumber }) => {
 
-    const [timeLeft, setTimeLeft] = useState(30 * 1000)
-    const ticker = setInterval(() => {
-            setTimeLeft(timeLeft - 1000)
-    }, 1000)
+  
+  const [timer, setTimer] = useState(30);
 
-    useEffect(() => {
-        if (timeLeft === 0) {           // When times up and the user missed to choose an answer
-            clearInterval(ticker);
-            // Should do something like reveal the correct answer
-        }
-    }, [timeLeft])
+  useEffect(() => {
+    if (timer === 0) return  // add the timeOut(false) default state to the parent component and here => return setTimeOut(true) that triggers to load the next question
+    const interval = setInterval(() => {
+      setTimer((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [timer, setTimeOut]);
 
-
-  return (
-    <div className='timer'>{timeLeft} s</div>
+  useEffect(() => {
+    setTimer(15);
+  }, [questionNumber]); // change the questionNumber variable at the parent component and pass that as a prop here.
+  
+  return ( <>
+    <h4>Time to answer:</h4>
+    <div className='timer'>{timer > 9 ? timer : `0`+timer}</div>
+  </>
   )
 }
 
-export default Timer
+export default Timer;
