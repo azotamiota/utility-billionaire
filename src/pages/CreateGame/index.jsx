@@ -13,6 +13,10 @@ function CreateGame() {
     {id: 2, name: 'medium', value: 'medium'},
     {id: 3, name: 'hard', value: 'hard'},
   ]
+  const startGame = (e) => {
+    e.preventDefault()
+    console.log('the game will start when you crate the function')
+  }
   return (
     <div className={styles.root}>
       <h1>Create your utility billionaire game!</h1>
@@ -21,6 +25,7 @@ function CreateGame() {
         <Input type='select' classVariant='light' name='difficulty' defaultValue={difficulty}>Difficulty</Input>
         <Input type='text' classVariant='light' name='room' defaultValue=''>Room Name</Input>
         <Input type='text' classVariant='light' name='room' defaultValue=''>Username</Input>
+        <Button text='Start' handleClick={startGame} classVariant='dark'/>
       </Container>
     </div>
   )
