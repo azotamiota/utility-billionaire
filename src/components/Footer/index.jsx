@@ -3,7 +3,7 @@ import styles from './index.module.css'
 
 function Footer() {
   return (
-    <footer role="footer" className={styles.footer}><p>Copyright Ⓒ The Millionaires 2022.</p></footer>
+    <footer role="footer" className={styles.footer}><p className={styles.neonText}>Copyright Ⓒ The Millionaires 2022.</p></footer>
   )
 }
 

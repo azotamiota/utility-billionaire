@@ -5,3 +5,6 @@ coverage
 dist
 .env
 blueprint-templates
+# Local Netlify folder
+.netlify
+package-lock.json
