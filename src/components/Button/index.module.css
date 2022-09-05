@@ -1,0 +1,11 @@
+.dark {
+    width: 20%;
+    margin: auto;
+    margin-top: 10px;
+    padding: 5px 20px;
+    border-radius: 25px;
+    border: none;
+    box-shadow: 2px 2px 0 rgba(152, 42, 130, 0.539);
+    min-height: 40px;
+    background-color: blueviolet;
+}
