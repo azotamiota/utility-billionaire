@@ -1,12 +1,23 @@
 import React, {useEffect, useState} from 'react'
 import styles from './index.module.css'
 import { Button, Container, Message, Title, TotalMoney } from '../../components'
+import useSound from "use-sound";
+import play from "../../../assets/sounds/play.mp3"
+import correct from "../../../assets/sounds/correct.mp3"
+import wrong from "../../../assets/sounds/wrong.mp3"
 
 function Game() {
   const [message, setMessage] = useState('');
   const [questionNumber, setQuestionNumber] =useState(0);
   const [currentMoney, setCurrentMoney] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
+  const [playSound] =useSound(play)
+  const [correctSound] = useSound(correct)
+  const [wrongSound] = useSound(wrong)
+
+  // useEffect(() => {
+  //   playSound()
+  // }, [playSound])
 
   
 const results = [
@@ -161,6 +172,7 @@ console.log(question)
     setMessage('You suck! How could you not know that?!')
     console.log('this is the wrong answer')
     setQuestionNumber((prev) => prev + 1)
+    wrongSound()
   }
   const correct = (e) => {
     e.preventDefault()
@@ -169,6 +181,7 @@ console.log(question)
     setQuestionNumber((prev) => prev + 1)
     setCorrectCount((prev) => prev + 1)
     setCurrentMoney((prev) => prev + money[correctCount].amount)
+    correctSound()
   }
 
   const answersArray = []
