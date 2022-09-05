@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './index.module.css'
 
-function JoinGame() {
+function Leaderboard() {
   return (
-    <div><h1>Welcome to Join Game page!!</h1></div>
+    <div><h1>Welcome to Leaderboard page!</h1></div>
   )
 }
 
-export default JoinGame
+export default Leaderboard
