@@ -3,7 +3,7 @@ import styles from './index.module.css'
 
 function Message({children}) {
   return (
-    <div className={styles.root}>{children}</div>
+    <div role="message" className={styles.root}>{children}</div>
   )
 }
 
