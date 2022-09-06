@@ -1,15 +1,35 @@
-import React from 'react'
+import React, {useContext, useEffect, useState } from 'react'
 import styles from './index.module.css'
 
 import { Button, Container, UserCard } from "../../components"
+import { SocketContext, useQuestions } from '../../context';
+import { useNavigate } from 'react-router-dom';
 
 function WaitingRoom() {
+  const { data, setData } = useQuestions()
+  const [players, setPlayers] = useState([]) // needs to come with the current username
+  const socket = useContext(SocketContext);
+  const navigateTo = useNavigate()
+  socket.on('joined', (incoming) => {
+    const arr = []
+    for (let player of incoming.players) {
+      arr.push(player.username)
+      console.log(player)
+    }
+    console.log(incoming.questions[0].questions)
+    setData(incoming.questions[0].questions)
+    console.log(data)
+    setPlayers(arr)
+  })
 
   const startGame = () => {
     console.log("this should start the game!")
-  }
+    navigateTo('/game')
 
-  const players = ["player1", "player2", "player3", "player4"] // needs functionality with socketIO?
+  }
+  useEffect(() => {
+    console.log(players)
+  }, [players])
 
   return (
     <div>
