@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react'
 import styles from './index.module.css'
-import io from 'socket.io-client';
+//import io from 'socket.io-client';
 
 import { Button, Container, UserCard } from "../../components"
 
 // const url = 'https://utility-billionaire.herokuapp.com'    // uncomment that you want to use as backend server
-const url = 'http://localhost:5000' 
-const socket = io.connect(url)
+//const url = 'http://localhost:5000' 
+//const socket = io.connect(url)
 
 function WaitingRoom() {
   
