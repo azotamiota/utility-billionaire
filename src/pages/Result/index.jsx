@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { Container, Title, UserCard } from '../../components';
 import styles from './index.module.css'
 import axios from 'axios'
+// import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
 
 function Result() {
   const players = [
@@ -37,6 +39,7 @@ function Result() {
     <div>
       <h1>Welcome to results!!</h1>
       <Container>
+        <Confetti/>
         <Title>Results</Title>
         {orderedPlayers.map(u => <UserCard username={u.username} score={u.score} key={u.id} />)}
       </Container>
