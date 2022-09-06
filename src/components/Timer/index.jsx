@@ -6,7 +6,7 @@ const Timer = ({ setTimeOut, questionNumber }) => {
   const [timer, setTimer] = useState(30);
 
   useEffect(() => {
-    if (timer === 0) return  // add the timeOut(false) default state to the parent component and here => return setTimeOut(true) that triggers to load the next question
+    if (timer === 0) return setTimeOut(true) // add the timeOut(false) default state to the parent component and here => return setTimeOut(true) that triggers to load the next question
     const interval = setInterval(() => {
       setTimer((prev) => prev - 1);
     }, 1000);

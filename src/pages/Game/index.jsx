@@ -3,7 +3,7 @@ import axios from 'axios'
 import useSound from "use-sound";
 
 import styles from './index.module.css'
-import { Button, Container, Message, Title, TotalMoney } from '../../components'
+import { Button, Container, Message, Title, Timer, TotalMoney } from '../../components'
 import play from "../../../assets/sounds/play.mp3"
 import rightAnswer from "../../../assets/sounds/correct.mp3"
 import wrongAnswer from "../../../assets/sounds/wrong.mp3"
@@ -20,8 +20,10 @@ function Game() {
   const [wrongSound] = useSound(wrongAnswer, {volume: 0.20})
   const { data } = useQuestions()
   const [timer, setTimer] = useState(15)
+  const [timeOut, setTimeOut] = useState(false)
   const [question, setQuestion] = useState(data[questionNumber])
   const [answersArray,setAnswersArray] = useState([])
+
   const money =
       [
         { id: 1, amount: 250000 },
@@ -44,6 +46,7 @@ useEffect(() => {
   setAnswersArray(answers)
 }, [questionNumber])
 
+
 useEffect(() => {
   if (timer === 0) {
     setQuestionNumber((prev) => prev + 1)
@@ -53,7 +56,7 @@ useEffect(() => {
     setTimer((prev) => prev - 1);
   }, 1000);
   return () => clearInterval(interval);
-}, [timer, questionNumber]);
+}, [timer, question]);
   
   const wrong = (e) => {
     e.preventDefault()
