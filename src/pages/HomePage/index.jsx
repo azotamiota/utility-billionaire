@@ -12,8 +12,8 @@ function HomePage() {
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
         <Title>Utility Billionaire</Title>
-        <Button text="Join Game" handleClick={() => navigate("/join")} classVariant={"neonText"}/>
-        <Button text="Create Game" handleClick={() => navigate("/create")} classVariant={"neonText"}/>
+        <Button text="Join Game" handleClick={() => navigate("/join")} classVariant="neonText"/>
+        <Button text="Create Game" handleClick={() => navigate("/create")} classVariant="neonText"/>
       </div>
     </div>
   )

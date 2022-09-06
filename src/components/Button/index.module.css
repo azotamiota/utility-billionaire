@@ -1,4 +1,4 @@
-/* .dark, .answer {
+.dark, .answer {
     margin: auto;
     margin-top: 10px;
     padding: 5px 20px;
@@ -16,9 +16,14 @@
 .answer {
     width: 60%;
     background-color: crimson;
-} */
+}
 
 .neonText {
+    font-size: 2rem;
+    font-family: 'Exo 2', sans-serif;
+    margin: 3%;
+    border: 1px solid white;
+    background-color: transparent;
     color: #fff;
     border: 1px solid #fff;
     border-radius: 10px;
@@ -56,4 +61,3 @@
         inset 0 0 1.3rem #cc1ab1;
         cursor: pointer;
 }
-
