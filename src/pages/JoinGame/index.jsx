@@ -10,11 +10,11 @@ function JoinGame() {
 
   return (
     <div>
-      <h1>Join a game!</h1>
+      <Title>Join a game!</Title>
       <Container>
         <Input type='text' classVariant='light' name='room' defaultValue=''>Room Name</Input>
         <Input type='text' classVariant='light' name='room' defaultValue=''>Username</Input>
-        <Button text='Join' handleClick={joinGame} classVariant='dark'/>
+        <Button text='Join' handleClick={joinGame} classVariant='neonText'/>
       </Container>
     </div>
   )
