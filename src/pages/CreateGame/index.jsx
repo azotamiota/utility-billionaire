@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 import styles from './index.module.css'
-import { Button, Container, Footer, Input, Header } from '../../components'
+import { Button, Container, Footer, Input, Header, Title } from '../../components'
 import { useQuestions } from '../../context'
 
 function CreateGame() {
@@ -36,7 +36,7 @@ function CreateGame() {
 
   return (
     <div className={styles.root}>
-      <h1>Create your utility billionaire game!</h1>
+      <Title>Create your utility billionaire game!</Title>
       <Container>
         <Input type='select' classVariant='light' name='category' defaultValue={topics}>Category</Input>
         <Input type='select' classVariant='light' name='difficulty' defaultValue={levels}>Difficulty</Input>
