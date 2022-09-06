@@ -17,7 +17,7 @@ function WaitingRoom() {
       {players.length === 4 ? <h2>You're lobby is ready to play!</h2> : <h2>Waiting for more players...</h2>}
       <Container>
         {players.map((p, i) => <UserCard key={i} username={p} classVariant='normal'/>)}
-        <Button text="Start" handleClick={startGame} classVariant="dark"/>
+        <Button text="Start" handleClick={startGame} classVariant="neonText"/>
       </Container>
     </div>
   )

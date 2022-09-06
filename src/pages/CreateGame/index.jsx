@@ -39,7 +39,7 @@ function CreateGame() {
         <Input type='select' classVariant='light' name='difficulty' defaultValue={difficulty}>Difficulty</Input>
         <Input type='text' classVariant='light' name='room' defaultValue=''>Room Name</Input>
         <Input type='text' classVariant='light' name='room' defaultValue=''>Username</Input>
-        <Button text='Start' handleClick={startGame} classVariant='dark'/>
+        <Button text='Start' handleClick={startGame} classVariant='neonText'/>
       </Container>
     </div>
   )
