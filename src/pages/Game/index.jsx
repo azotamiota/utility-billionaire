@@ -40,8 +40,20 @@ function Game() {
   }
 
   const wrong = () => {
-   
-    setMessage('You suck! How could you not know that?!')
+    const wrongAnswerMessages = [
+      'You suck! Who will pay for your phone bill?!', 
+      'OMG! This was an elementery school level question!',
+      'Nah... start begging money for a hot shower!',
+      'You\'re going to freeze this winter',
+      'Stock up some candles! You won\'t have money to pay for electricity',
+      'I\'d buy some tinned food if I was you. No hot food next month...',
+      'Surely can\'t pay the rent next month, let\'s buy a cheap tent!',
+      'If you have to pay mortgage, start to worry, mate!',
+      'Intermittent fasting is coming: One month eating, one month starving.',
+      'Buy a thick coat before winter. Your bedromm will be like an igloo',
+      ]
+
+    setMessage(wrongAnswerMessages[Math.floor(Math.random() * wrongAnswerMessages.length)])
     
     console.log('this is the wrong answer')
     setQuestionNumber((prev) => prev + 1)
@@ -49,9 +61,22 @@ function Game() {
   }
 
   const correct = () => {
-   
-    setMessage('You did well. You\'re still poor tho... ')
-    
+
+    const correctAnswerMessages = [
+      'You did well. Still shouldn\'t use the kettle too often...', 
+      'Good job, now you can buy a slice of bread',
+      'Not bad, but still not enough to beat inflation..',
+      'Well done! Now you might be able buy one full litre of diesel',
+      'Hmm, good.. Maybe this weekend begging at the corner won\'t be needed',
+      'Wow, nice! You might be able to reduce your debt to -£10,000',
+      'Good one! Let\'s spend some Universal Credit',
+      'Quite good, pal! The bank might not take your house this month',
+      'Woohoo! Finally you can top up your SIM after 6 months!',
+      'Yaaay! Finally you can turn the light on while having dinner!'
+      ]
+
+    setMessage(correctAnswerMessages[Math.floor(Math.random() * correctAnswerMessages.length)])
+       
     setQuestionNumber((prev) => prev + 1)
     setCorrectCount((prev) => prev + 1)
     
