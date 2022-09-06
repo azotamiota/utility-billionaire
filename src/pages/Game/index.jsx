@@ -3,21 +3,18 @@ import styles from './index.module.css'
 import { Button, Container, Message, Title, TotalMoney } from '../../components'
 import useSound from "use-sound";
 import play from "../../../assets/sounds/play.mp3"
-import correct from "../../../assets/sounds/correct.mp3"
-import wrong from "../../../assets/sounds/wrong.mp3"
+import rightAnswer from "../../../assets/sounds/correct.mp3"
+import wrongAnswer from "../../../assets/sounds/wrong.mp3"
+
 
 function Game() {
   const [message, setMessage] = useState('');
   const [questionNumber, setQuestionNumber] =useState(0);
   const [currentMoney, setCurrentMoney] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
-  const [playSound] =useSound(play)
-  const [correctSound] = useSound(correct)
-  const [wrongSound] = useSound(wrong)
-
-  // useEffect(() => {
-  //   playSound()
-  // }, [playSound])
+  const [playSound] =useSound(play, {volume: 0.20})
+  const [correctSound] = useSound(rightAnswer, {volume: 0.20})
+  const [wrongSound] = useSound(wrongAnswer, {volume: 0.20})
 
   
 const results = [
