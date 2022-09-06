@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react'
+import axios from 'axios'
+import useSound from "use-sound";
+
 import styles from './index.module.css'
 import { Button, Container, Message, Title, TotalMoney } from '../../components'
-import useSound from "use-sound";
 import play from "../../../assets/sounds/play.mp3"
 import rightAnswer from "../../../assets/sounds/correct.mp3"
 import wrongAnswer from "../../../assets/sounds/wrong.mp3"
-
+import { useQuestions } from '../../context';
 
 function Game() {
   const [message, setMessage] = useState('');
@@ -15,129 +17,7 @@ function Game() {
   const [playSound] =useSound(play, {volume: 0.20})
   const [correctSound] = useSound(rightAnswer, {volume: 0.20})
   const [wrongSound] = useSound(wrongAnswer, {volume: 0.20})
-
-  
-const results = [
-    {
-      category: "General Knowledge",
-      type: "multiple",
-      difficulty: "easy",
-      question: "Which company did Valve cooperate with in the creation of the Vive?",
-      correct_answer: "HTC",
-      incorrect_answers: [
-        "Oculus",
-        "Google",
-        "Razer"
-      ]
-    },
-    {
-      category: "General Knowledge",
-      type: "multiple",
-      difficulty: "easy",
-      question: "What does a funambulist walk on?",
-      correct_answer: "A Tight Rope",
-      incorrect_answers: [
-        "Broken Glass",
-        "Balls",
-        "The Moon"
-      ]
-    },
-    {
-      category: "General Knowledge",
-      type: "multiple",
-      difficulty: "easy",
-      question: "What is the name of the Jewish New Year?",
-      correct_answer: "Rosh Hashanah",
-      incorrect_answers: [
-        "Elul",
-        "New Year",
-        "Succoss"
-      ]
-    },
-    {
-      category: "General Knowledge",
-      type: "multiple",
-      difficulty: "easy",
-      question: "According to Sherlock Holmes, &quot;If you eliminate the impossible, whatever remains, however improbable, must be the...&quot;",
-      correct_answer: "Truth",
-      incorrect_answers: [
-        "Answer",
-        "Cause",
-        "Source"
-      ]
-    },
-    {
-      category: "General Knowledge",
-      type: "multiple",
-      difficulty: "easy",
-      question: "What was the first ever London Underground line to be built?",
-      correct_answer: "Metropolitan Line",
-      incorrect_answers: [
-        "Circle Line",
-        "Bakerloo Line",
-        "Victoria Line"
-      ]
-    },
-    {
-      category: "General Knowledge",
-      type: "multiple",
-      difficulty: "easy",
-      question: "Which of the following presidents is not on Mount Rushmore?",
-      correct_answer: "John F. Kennedy",
-      incorrect_answers: [
-        "Theodore Roosevelt",
-        "Abraham Lincoln",
-        "Thomas Jefferson"
-      ]
-    },
-    {
-      category: "General Knowledge",
-      type: "multiple",
-      difficulty: "easy",
-      question: "Which candy is NOT made by Mars?",
-      correct_answer: "Almond Joy",
-      incorrect_answers: [
-        "M&amp;M&#039;s",
-        "Twix",
-        "Snickers"
-      ]
-    },
-    {
-      category: "General Knowledge",
-      type: "multiple",
-      difficulty: "easy",
-      question: "What are Panama hats made out of?",
-      correct_answer: "Straw",
-      incorrect_answers: [
-        "Silk",
-        "Hemp",
-        "Flax"
-      ]
-    },
-    {
-      category: "General Knowledge",
-      type: "multiple",
-      difficulty: "easy",
-      question: "Which of the following is not an Ivy League University?",
-      correct_answer: "Stanford",
-      incorrect_answers: [
-        "University of Pennsylvania",
-        "Harvard",
-        "Princeton"
-      ]
-    },
-    {
-      category: "General Knowledge",
-      type: "multiple",
-      difficulty: "easy",
-      question: "What is the profession of Elon Musk&#039;s mom, Maye Musk?",
-      correct_answer: "Model",
-      incorrect_answers: [
-        "Professor",
-        "Biologist",
-        "Musician"
-      ]
-    }]
+  const { data } = useQuestions()
 
     const money =
         [
@@ -153,16 +33,11 @@ const results = [
           { id: 10, amount: 1000000000 }
         ]
 
-console.log(results)
-const [question, setQuestion] = useState(results[questionNumber])
+const [question, setQuestion] = useState(data[questionNumber])
 
 useEffect(() => {
-  setQuestion(results[questionNumber])
+  setQuestion(data[questionNumber])
 }, [questionNumber])
-
-console.log(questionNumber)
-console.log(question)
-
   
   const wrong = (e) => {
     e.preventDefault()

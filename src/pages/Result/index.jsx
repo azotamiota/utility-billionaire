@@ -32,7 +32,6 @@ function Result() {
     // })
   }, [])
   const orderedPlayers = sortByKey(players, 'score')
-  console.log(orderedPlayers)
   return (
     <div>
       <h1>Welcome to results!!</h1>
