@@ -5,7 +5,7 @@ function Input({type, defaultValue, name, classVariant, children, onChange=()=>{
   return (
     type=='select' ? 
     <>
-    <label htmlFor={name}>{children}
+    <label htmlFor={name}>{children}</label>
     <select name={name} className={styles[`${classVariant}`]} id={name} onChange={onChange}>
       {defaultValue.map(o => <option key={o.id} value={o.value}>{o.name}</option>)}
     </select>

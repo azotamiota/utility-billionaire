@@ -57,17 +57,17 @@ a {
     text-shadow: 
         -0.2rem -0.2rem 1rem #fff,
         0.2rem 0.2rem 1rem #fff,
-        0 0 2rem #cc1ab1,
-        0 0 4rem #cc1ab1,
-        0 0 6rem #cc1ab1,
-        0 0 8rem #cc1ab1,
-        0 0 10rem #cc1ab1;
+        0 0 2rem #c49a67,
+        0 0 4rem #c49a67,
+        0 0 6rem #c49a67,
+        0 0 8rem #c49a67,
+        0 0 10rem #c49a67;
     box-shadow: 0 0 .2rem #fff,
         0 0 .2rem #fff,
-        0 0 2rem #cc1ab1,
-        0 0 0.8rem #cc1ab1,
-        0 0 2.8rem #cc1ab1,
-        inset 0 0 1.3rem #cc1ab1;
+        0 0 2rem #c49a67,
+        0 0 0.8rem #c49a67,
+        0 0 2.8rem #c49a67,
+        inset 0 0 1.3rem #c49a67;
         cursor: pointer;
 }
 
