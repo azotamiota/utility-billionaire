@@ -17,13 +17,14 @@ function Leaderboard() {
     fetchUsers()
   }, [])
 
-  return (<>
+  return (
+  <div className={styles.leaderboarddiv}>
     <Container>
       <Title>Leaderboard:</Title>
       {console.log('leaderboard: ', leaderboard)}
       {leaderboard && <UserCard currentPlayers={leaderboard.slice(0, 11)}/>}
     </Container>
-  </>
+  </div>
   )
 }
 
