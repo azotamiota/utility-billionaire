@@ -67,8 +67,8 @@ function Game() {
     setMessage(wrongAnswerMessages[Math.floor(Math.random() * wrongAnswerMessages.length)])
     
     console.log('this is the wrong answer')
-    setQuestionNumber((prev) => prev + 1)
-    // wrongSound()
+    // setQuestionNumber((prev) => prev + 1)
+    wrongSound()
   }
 
   const correct = () => {
@@ -88,28 +88,29 @@ function Game() {
 
     setMessage(correctAnswerMessages[Math.floor(Math.random() * correctAnswerMessages.length)])
        
-    setQuestionNumber((prev) => {
-      if (prev < 9 ) {
-        return prev + 1
-      }
-    })
+    // setQuestionNumber((prev) => {
+    //   if (prev < 9 ) {
+    //     return prev + 1
+    //   }
+    // })
 
     setCorrectCount((prev) => prev + 1)
     
     setCurrentMoney((prev) => prev + money[correctCount].amount)
-    // correctSound()
+    correctSound()
   }
 
   const timeOut = () => {
     
     setMessage('Time\'s up!')
-  
-    setQuestionNumber((prev) => {
-      if (prev < 9 ) {
-        return prev + 1
-      }
-    })
-    // wrongSound()
+    setTimeout(() => {
+      setQuestionNumber((prev) => {
+        if (prev < 9 ) {
+          return prev + 1
+        }
+      })
+    }, 5000)
+    wrongSound()
   }
 
   const handleClick = (answer) => {
@@ -120,7 +121,6 @@ function Game() {
     }
   }
 
-  
 
   return (
     <>
