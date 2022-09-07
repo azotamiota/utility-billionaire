@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useContext, useEffect, useRef} from 'react'
 import { useNavigate } from 'react-router-dom';
 import useSound from "use-sound";
 
@@ -18,8 +18,9 @@ function Game() {
   const [username, setUsername] = currentUser
   
   const { data } = useQuestions()
+  const currentAnswer = useRef('')
+  const [randomisedAnswerList, setRandomisedAnswerList] = useState([])
   const [questionNumber, setQuestionNumber] = useState(0);
-  const [currentAnswer, setCurrentAnswer] = useState('')
   const [answerChosen, setAnswerChosen] = useState({index: 'none'})
   const [message, setMessage] = useState('');
   const [currentMoney, setCurrentMoney] = useState(0)
@@ -101,14 +102,14 @@ function Game() {
   }
 
   const timeOut = () => {
-    // if (isAnswerChosen) {
-    //   if (currentAnswer.trim() !== currentAnswer) { // this is how the program distinguish which one is the correct answer. See explanation below in comments
-    //     correct()
-    //   } else {
-    //     wrong()
-    //   }
-    //   setIsAnswerChosen(false)
-    // }
+    if (answerChosen.index !== 'none') {
+      if (currentAnswer.current.trim() !== currentAnswer.current) { // this is how the program distinguish which one is the correct answer. See explanation below in comments
+        correct()
+      } else {
+        wrong()
+      }
+      setAnswerChosen({index: 'none'})
+    }
 
     setMessage('Time\'s up!')
     setTimeout(() => {
@@ -128,9 +129,12 @@ function Game() {
     console.log('button has clicked')
     e.preventDefault()
     // e.target.style.backgroundColor = 'red'
-    setAnswerChosen({index: index})
-    setCurrentAnswer(answer)
+    setAnswerChosen({ index })
+    currentAnswer.current = answer
   }
+  useEffect(() => {
+    setRandomisedAnswerList([...data[questionNumber].incorrect_answers, ' ' + data[questionNumber].correct_answer + ' '].sort(() => Math.random() - 0.5))
+  }, [questionNumber])
 
   return (
     <>
@@ -139,10 +143,7 @@ function Game() {
       <Container>
         {/* <TotalMoney><h3>{questionNumber + 1}. Question</h3> for £{money[correctCount].amount}</TotalMoney> */}
         <Title classVariant='question'>{data[questionNumber].question}</Title>
-        {[...data[questionNumber].incorrect_answers, ' ' + data[questionNumber].correct_answer + ' '] // all answers in one array, this line makes an extra " " around the correct answer 
-            .sort(() => Math.random() - 0.5)
-            // as answers appear on buttons, the correct will appear like others by getting the space around trimmed
-            .map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={answerChosen.index === index ? 'neonText-clicked' : 'neonText'}/>)} 
+        {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={answerChosen.index === index ? 'neonText-clicked' : 'neonText'}/>)} 
       </Container>
       {/* <TotalMoney>Total: ${currentMoney}</TotalMoney> */}
       <Message>{message}</Message>
