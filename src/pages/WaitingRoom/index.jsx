@@ -27,7 +27,7 @@ function WaitingRoom() {
 
   const startGame = () => {
     console.log("this should start the game!")
-    socket.emit('start_game', '/game')
+    socket.emit('start_game')
   }
   useEffect(() => {
     console.log(players)
