@@ -16,7 +16,7 @@ function JoinGame() {
   }
 
   return (
-    <div>
+    <div className={styles.joindiv}>
       <Title>Join a game!</Title>
       <Container>
         <Input type='text' classVariant='light' name='room' defaultValue={room} onChange={(e) => setRoom(e.target.value)}>Room Name</Input>
