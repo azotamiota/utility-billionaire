@@ -13,7 +13,7 @@ const Timer = ({ timeOut, questionNumber }) => {
       setTimer((prev) => prev - 1);
     }, 1000);
     return () => clearInterval(interval);
-  }, [timer, timeOut]);
+  }, [timer]);
 
   useEffect(() => {
     setTimer(5);

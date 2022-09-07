@@ -10,17 +10,17 @@ import { useQuestions, SocketContext, useRoom } from '../../context';
 
 
 function Game() {
-
+  
   const socket = useContext(SocketContext)
   const { room, players, currentUser } = useRoom();
   const [currentRoom, setCurrentRoom] = room
   const [currentPlayers, setCurrentPlayers] = players
   const [username, setUsername] = currentUser
-
-  const [questionNumber, setQuestionNumber] = useState(0);
-  const { data } = useQuestions()
-  // console.log('data: ', data)
   
+  const { data } = useQuestions()
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const [currentAnswer, setCurrentAnswer] = useState('')
+  const [answerChosen, setAnswerChosen] = useState({index: 'none'})
   const [message, setMessage] = useState('');
   const [currentMoney, setCurrentMoney] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
@@ -101,26 +101,36 @@ function Game() {
   }
 
   const timeOut = () => {
-    
+    // if (isAnswerChosen) {
+    //   if (currentAnswer.trim() !== currentAnswer) { // this is how the program distinguish which one is the correct answer. See explanation below in comments
+    //     correct()
+    //   } else {
+    //     wrong()
+    //   }
+    //   setIsAnswerChosen(false)
+    // }
+
     setMessage('Time\'s up!')
     setTimeout(() => {
+      // flashing animation with the correct answer
       setQuestionNumber((prev) => {
         if (prev < 9 ) {
           return prev + 1
         }
       })
+      setAnswerChosen({index: 'none'})
+
     }, 5000)
-    wrongSound()
+    // wrongSound()
   }
 
-  const handleClick = (answer) => {
-    if (answer.trim() !== answer) { // this is how the program distinguish which one is the correct answer. See explanation below in comments
-      correct()
-    } else {
-      wrong()
-    }
+  const handleClick = (e, index, answer) => {
+    console.log('button has clicked')
+    e.preventDefault()
+    // e.target.style.backgroundColor = 'red'
+    setAnswerChosen({index: index})
+    setCurrentAnswer(answer)
   }
-
 
   return (
     <>
@@ -132,10 +142,10 @@ function Game() {
         {[...data[questionNumber].incorrect_answers, ' ' + data[questionNumber].correct_answer + ' '] // all answers in one array, this line makes an extra " " around the correct answer 
             .sort(() => Math.random() - 0.5)
             // as answers appear on buttons, the correct will appear like others by getting the space around trimmed
-            .map((answer) => <Button key={Math.random()} handleClick={() => handleClick(answer)} text={answer.trim()} classVariant='neonText'/>)} 
+            .map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={answerChosen.index === index ? 'neonText-clicked' : 'neonText'}/>)} 
       </Container>
       {/* <TotalMoney>Total: ${currentMoney}</TotalMoney> */}
-      {/* <Message>{message}</Message> */}
+      <Message>{message}</Message>
       {/* here i want to implement a "cash" animation on the page instead of message */}
     </div>
     </>
