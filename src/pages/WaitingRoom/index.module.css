@@ -2,7 +2,7 @@ h2 {
     text-align: center;
     color: black;
     font-family: 'Exo 2', sans-serif;
-    font-size: 2rem;
+    font-size: 1rem;
     text-shadow: 
         -0.2rem -0.2rem 1rem #fff,
         0.2rem 0.2rem 1rem #fff,
@@ -11,4 +11,26 @@ h2 {
         0 0 6rem #08f,
         0 0 8rem #08f,
         0 0 10rem #08f;
+}
+
+.waitingdiv {
+    margin-top: 200px;
+}
+
+@media (min-width: 800px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+    span {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 990px) {
+    h2 {
+        font-size: 2rem;
+    }
+    .waitingdiv {
+        margin-top: 150px;
+    }
 }

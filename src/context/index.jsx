@@ -34,7 +34,7 @@ const RoomContext = createContext();
 
 export const RoomProvider = ({ children }) => {
     const [ room, setRoom ] = useState();
-    const [ players, setPlayers ] = useState();
+    const [ players, setPlayers ] = useState([]);
     const [ currentUser, setCurrentUser ] = useState();
     
     return (
