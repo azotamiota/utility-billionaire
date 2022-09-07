@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState } from 'react'
 import styles from './index.module.css'
 //import io from 'socket.io-client';
 
-import { Button, Container, UserCard } from "../../components"
+import { Button, Container, UserCard, Title } from "../../components"
 import { SocketContext, useQuestions } from '../../context';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,7 +38,7 @@ function WaitingRoom() {
 
   return (
     <div>
-      <h1>Room name</h1> {/*should display actual room name!*/}
+      <Title>Room name</Title> {/*should display actual room name!*/}
       {players.length === 4 ? <h2>You're lobby is ready to play!</h2> : <h2>Waiting for more players...</h2>}
       <Container>
         {players.map((p, i) => <UserCard key={i} username={p} classVariant='normal'/>)}
