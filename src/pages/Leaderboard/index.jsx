@@ -21,7 +21,7 @@ function Leaderboard() {
     <Container>
       <Title>Leaderboard:</Title>
       {console.log('leaderboard: ', leaderboard)}
-      {leaderboard && leaderboard.slice(0, 11).map(user => <UserCard username={user.username} score={user.score} key={user._id}/>)}
+      {leaderboard && <UserCard currentPlayers={leaderboard.slice(0, 11)}/>}
     </Container>
   </>
   )

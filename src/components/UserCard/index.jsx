@@ -1,12 +1,20 @@
 import React from 'react'
 import styles from './index.module.css'
 
-function UserCard({ username, score, classVariant}) {
+function UserCard({ currentPlayers, classVariant}) {
+  console.log('currentPlayers in UserCard: ', currentPlayers);
   return (
-    <div role="username" className={styles[`${classVariant}`]}>
-      <span>{username}</span>&nbsp;<span>{score}</span>
-    </div>
-  )
+      currentPlayers.map(player => {
+      return (
+        <div role="username" key={Math.random()} className={styles[`${classVariant}`]}>
+        <span>{player.username}</span>&nbsp;<span>{player.score}</span>
+        </div>
+      )
+      }
+    )
+   
+    )
+  
 }
 
 export default UserCard
