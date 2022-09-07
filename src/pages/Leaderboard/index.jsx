@@ -17,13 +17,14 @@ function Leaderboard() {
     fetchUsers()
   }, [])
 
-  return (<>
+  return (
+  <div className={styles.leaderboarddiv}>
     <Container>
       <Title>Leaderboard:</Title>
       {console.log('leaderboard: ', leaderboard)}
-      {leaderboard && leaderboard.slice(0, 11).map(user => <UserCard username={user.username} score={user.score} key={user._id}/>)}
+      {leaderboard && leaderboard.slice(0, 11).map(user => <UserCard username={user.username} score={user.score} key={user._id} classVariant="normal"/>)}
     </Container>
-  </>
+  </div>
   )
 }
 
