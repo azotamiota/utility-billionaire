@@ -1,3 +1,4 @@
+
 .light {
     /** This is to make the select and input the same width */
     -ms-box-sizing:content-box;
@@ -10,9 +11,4 @@
     margin: auto;
     margin-bottom: 20px;
     width: 60%;
-}
-
-label {
-    text-align: center;
-    width: 100%;
 }

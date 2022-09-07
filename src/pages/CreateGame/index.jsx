@@ -49,7 +49,7 @@ function CreateGame() {
 
   return (
     <div className={styles.root}>
-      <Title>Create your utility billionaire game!</Title>
+      {/* <Title>Create your utility billionaire game!</Title> */}
       <Container>
         <Input type='select' classVariant='light' name='category' defaultValue={topics} onChange={(e) => setCategory(e.target.value)}>Category</Input>
         <Input type='select' classVariant='light' name='difficulty' defaultValue={levels} onChange={(e) => setDifficulty(e.target.value)}>Difficulty</Input>
