@@ -21,11 +21,13 @@ function WaitingRoom() {
     console.log(data)
     setPlayers(arr)
   })
+  socket.on('begin', () => {
+    navigateTo('/game')
+  })
 
   const startGame = () => {
     console.log("this should start the game!")
-    navigateTo('/game')
-
+    socket.emit('start_game', '/game')
   }
   useEffect(() => {
     console.log(players)
