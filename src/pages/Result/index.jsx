@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { Container, Title, UserCard } from '../../components';
 import styles from './index.module.css'
 import axios from 'axios'
@@ -10,13 +10,14 @@ function Result() {
 
   const socket = useContext(SocketContext);
 
+  const [players, setPlayers] = useState([])
 
-  let players = [
-    { id: 1, username: 'Falkon', score: 600},
-    { id: 2, username: 'Gonzo', score: 300},
-    { id: 3, username: 'Rat234', score: 60},
-    { id: 4, username: 'FatBee34', score: 100},
-  ]
+  // let players = [
+  //   // { id: 1, username: 'Falkon', score: 600},
+  //   // { id: 2, username: 'Gonzo', score: 300},
+  //   // { id: 3, username: 'Rat234', score: 60},
+  //   // { id: 4, username: 'FatBee34', score: 100},
+  // ]
   function sortByKey(array, key) {
     return players.sort(function(a, b) {
         const x = a[key]; const y = b[key];
@@ -27,16 +28,16 @@ function Result() {
   socket.on('final_scores', data => {
     console.log('final results are coming in: ', data);
     console.log('players before: ', players);
-    players = data
+    setPlayers(data)
     console.log('players after: ', players);
   })
 
   
-  let orderedPlayers;
+  let orderedPlayers = []
   
-  useEffect(() => {
-    orderedPlayers = sortByKey(players, 'score')
-  }, [players])
+  // useEffect(() => {
+  //   orderedPlayers = sortByKey(players, 'score')
+  // }, [players])
   
   useEffect(() => {
 
@@ -63,7 +64,7 @@ function Result() {
       <Container>
         <Confetti/>
         <Title>Results</Title>
-        {orderedPlayers && orderedPlayers.map(u => <UserCard username={u.username} score={u.score} key={u.id} />)}
+        <UserCard currentPlayers={sortByKey(players, 'score')} />
       </Container>
     </div>
   )
