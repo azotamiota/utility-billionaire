@@ -8,9 +8,11 @@
 ## Table of Contents :page_with_curl:
 
 * [General Info](#general-information)
+* [Project Objectives](#project-objectives)
 * [Technologies Used](#technologies-used)
 * [Screenshots](#screenshots)
 * [Collaborators](#collaborators)
+
 <p>&nbsp</p>
 
 
@@ -44,6 +46,7 @@ For this project, we have built a quiz game in react. It can be played by one pl
 
 ![Utility-billionaire](./assets/sounds/Screenshot%20(9).png)
 <p>&nbsp</p>
+
 
 ## Collaborators :e-mail:
 <p>&nbsp</p>
