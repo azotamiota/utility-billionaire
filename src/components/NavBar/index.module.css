@@ -1,9 +1,10 @@
 .navContainer {
-    /* background-color: grey; */
-    padding: 2%;
+    background-image: url("../../assets/background.jpg");
+    background-size: 4000px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
 .navbar {
@@ -84,7 +85,8 @@ a {
 
     .hamburger {
         position: absolute;
-        right: 3%;
+        top: 10px;
+        right: 10px;
         cursor: pointer;
     }
 
