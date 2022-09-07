@@ -39,7 +39,7 @@ function WaitingRoom() {
   }, [players])
 
   return (
-    <div>
+    <div className={styles.waitingdiv}>
       <Title>Room name</Title> {/*should display actual room name!*/}
       {players.length === 4 ? <h2>You're lobby is ready to play!</h2> : <h2>Waiting for more players...</h2>}
       <Container>
