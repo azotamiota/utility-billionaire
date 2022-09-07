@@ -1,87 +1,116 @@
-import React, {useEffect, useState} from 'react'
-import axios from 'axios'
+import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import useSound from "use-sound";
 
 import styles from './index.module.css'
-import { Button, Container, Message, Title, TotalMoney } from '../../components'
-import play from "../../../assets/sounds/play.mp3"
+import { Button, Container, Message, Title, TotalMoney, Timer } from '../../components'
 import rightAnswer from "../../../assets/sounds/correct.mp3"
 import wrongAnswer from "../../../assets/sounds/wrong.mp3"
 import { useQuestions } from '../../context';
-import { IoFileTray } from 'react-icons/io5';
+
 
 function Game() {
+
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const { data } = useQuestions()
+  console.log('data: ', data)
+  
   const [message, setMessage] = useState('');
-  const [questionNumber, setQuestionNumber] =useState(0);
   const [currentMoney, setCurrentMoney] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
-  const [playSound] =useSound(play, {volume: 0.20})
   const [correctSound] = useSound(rightAnswer, {volume: 0.20})
   const [wrongSound] = useSound(wrongAnswer, {volume: 0.20})
-  const { data } = useQuestions()
-  const [timer, setTimer] = useState(15)
-  const [question, setQuestion] = useState(data[questionNumber])
-  const [answersArray,setAnswersArray] = useState([])
   const money =
       [
-        { id: 1, amount: 250000 },
-        { id: 2, amount: 500000 },
-        { id: 3, amount: 1000000 },
-        { id: 4, amount: 15000000 },
-        { id: 5, amount: 30000000},
-        { id: 6, amount: 60000000 },
-        { id: 7, amount: 125000000 },
-        { id: 8, amount: 250000000 },
-        { id: 9, amount: 500000000 },
-        { id: 10, amount: 1000000000 }
+        { id: 1, amount: 25 },
+        { id: 2, amount: 50 },
+        { id: 3, amount: 100 },
+        { id: 4, amount: 1500 },
+        { id: 5, amount: 3000},
+        { id: 6, amount: 6000 },
+        { id: 7, amount: 12500 },
+        { id: 8, amount: 25000 },
+        { id: 9, amount: 50000 },
+        { id: 10, amount: 100000 }
+      ]
+  
+  const navigate = useNavigate()    
+  if (questionNumber > 9) {
+    navigate('/result')
+  }
+
+  const wrong = () => {
+    const wrongAnswerMessages = [
+      'You suck! Who will pay for your phone bill?!', 
+      'OMG! This was an elementery school level question!',
+      'Nah... start begging money for a hot shower!',
+      'You\'re going to freeze this winter',
+      'Stock up some candles! You won\'t have money to pay for electricity',
+      'I\'d buy some tinned food if I was you. No hot food next month...',
+      'Surely can\'t pay the rent next month, let\'s buy a cheap tent!',
+      'If you have to pay mortgage, start to worry, mate!',
+      'Intermittent fasting is coming: One month eating, one month starving.',
+      'Buy a thick coat before winter. Your bedromm will be like an igloo',
       ]
 
-useEffect(() => {
-  setQuestion(data[questionNumber])
-  const answers = [...question.incorrect_answers.map(a => { return {answer: a, handleClick: wrong}}), {answer: question.correct_answer, handleClick: correct}]
-  answers.sort(() => Math.random() - 0.5)
-  console.log(questionNumber)
-  setAnswersArray(answers)
-}, [questionNumber])
-
-useEffect(() => {
-  if (timer === 0) {
-    setQuestionNumber((prev) => prev + 1)
-    setTimer(15)
-  }
-  const interval = setInterval(() => {
-    setTimer((prev) => prev - 1);
-  }, 1000);
-  return () => clearInterval(interval);
-}, [timer, questionNumber]);
-  
-  const wrong = (e) => {
-    e.preventDefault()
-    setMessage('You suck! How could you not know that?!')
-    setTimer(15)
+    setMessage(wrongAnswerMessages[Math.floor(Math.random() * wrongAnswerMessages.length)])
+    
     console.log('this is the wrong answer')
     setQuestionNumber((prev) => prev + 1)
     wrongSound()
   }
-  const correct = (e) => {
-    e.preventDefault()
-    setMessage('You did well. You\'re still poor tho... ')
-    console.log('this is the correct answer')
+
+  const correct = () => {
+
+    const correctAnswerMessages = [
+      'You did well. Still shouldn\'t use the kettle too often...', 
+      'Good job, now you can buy a slice of bread',
+      'Not bad, but still not enough to beat inflation..',
+      'Well done! Now you might be able buy one full litre of diesel',
+      'Hmm, good.. Maybe this weekend begging at the corner won\'t be needed',
+      'Wow, nice! You might be able to reduce your debt to -£10,000',
+      'Good one! Let\'s spend some Universal Credit',
+      'Quite good, pal! The bank might not take your house this month',
+      'Woohoo! Finally you can top up your SIM after 6 months!',
+      'Yaaay! Finally you can turn the light on while having dinner!'
+      ]
+
+    setMessage(correctAnswerMessages[Math.floor(Math.random() * correctAnswerMessages.length)])
+       
     setQuestionNumber((prev) => prev + 1)
     setCorrectCount((prev) => prev + 1)
-    setTimer(15)
+    
     setCurrentMoney((prev) => prev + money[correctCount].amount)
     correctSound()
+  }
+
+  const timeOut = () => {
+    
+    setMessage('Time\'s up!')
+  
+    setQuestionNumber((prev) => prev + 1)
+    wrongSound()
+  }
+
+  const handleClick = (answer) => {
+    if (answer.trim() !== answer) { // this is how the program distinguish which one is the correct answer. See explanation below in comments
+      correct()
+    } else {
+      wrong()
+    }
   }
 
   return (
     <div>
       <Title>Welcome to Utility Billionaire Game!!</Title>
-      <div>{timer}</div>
+      <Timer timeOut={() => timeOut()} questionNumber={questionNumber}/>
       <Container>
-        <TotalMoney>question for £{money[correctCount].amount}</TotalMoney>
-        <Title classVariant='question'>{question.question}</Title>
-        {answersArray.map((a, i) => <Button key={i} handleClick={a.handleClick} text={a.answer} classVariant='answer'/>)}
+        <TotalMoney><h3>{questionNumber + 1}. Question</h3> for £{money[correctCount].amount}</TotalMoney>
+        <Title classVariant='question'>{data[questionNumber].question}</Title>
+        {[...data[questionNumber].incorrect_answers, ' ' + data[questionNumber].correct_answer + ' '] // all answers in one array, this line makes an extra " " around the correct answer 
+            .sort(() => Math.random() - 0.5)
+            // as answers appear on buttons, the correct will appear like others by getting the space around trimmed
+            .map((answer) => <Button key={Math.random()} handleClick={() => handleClick(answer)} text={answer.trim()} classVariant='answer'/>)} 
       </Container>
       <TotalMoney>Total: ${currentMoney}</TotalMoney>
       <Message>{message}</Message>
@@ -89,4 +118,4 @@ useEffect(() => {
   )
 }
 
-export default Game
+export default Game;
