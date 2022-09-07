@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import useSound from "use-sound";
 
@@ -6,14 +6,20 @@ import styles from './index.module.css'
 import { Button, Container, Message, Title, TotalMoney, Timer } from '../../components'
 import rightAnswer from "../../../assets/sounds/correct.mp3"
 import wrongAnswer from "../../../assets/sounds/wrong.mp3"
-import { useQuestions } from '../../context';
+import { useQuestions, SocketContext, useRoom } from '../../context';
 
 
 function Game() {
 
+  const socket = useContext(SocketContext)
+  const { room, players, currentUser } = useRoom();
+  const [currentRoom, setCurrentRoom] = room
+  const [currentPlayers, setCurrentPlayers] = players
+  const [username, setUsername] = currentUser
+
   const [questionNumber, setQuestionNumber] = useState(0);
   const { data } = useQuestions()
-  console.log('data: ', data)
+  // console.log('data: ', data)
   
   const [message, setMessage] = useState('');
   const [currentMoney, setCurrentMoney] = useState(0)
@@ -34,10 +40,15 @@ function Game() {
         { id: 10, amount: 100000 }
       ]
   
-  const navigate = useNavigate()    
-  if (questionNumber > 9) {
-    navigate('/result')
-  }
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    if (questionNumber === 9) {
+      console.log('this is the last wuestion and we emit: ', {currentMoney, currentRoom, currentPlayers, username})
+      socket.emit('send_result', {currentMoney, currentRoom, currentPlayers, username})
+        navigate('/result')
+    }
+  }, [questionNumber])
 
   const wrong = () => {
     const wrongAnswerMessages = [
@@ -57,7 +68,7 @@ function Game() {
     
     console.log('this is the wrong answer')
     setQuestionNumber((prev) => prev + 1)
-    wrongSound()
+    // wrongSound()
   }
 
   const correct = () => {
@@ -77,19 +88,28 @@ function Game() {
 
     setMessage(correctAnswerMessages[Math.floor(Math.random() * correctAnswerMessages.length)])
        
-    setQuestionNumber((prev) => prev + 1)
+    setQuestionNumber((prev) => {
+      if (prev < 9 ) {
+        return prev + 1
+      }
+    })
+
     setCorrectCount((prev) => prev + 1)
     
     setCurrentMoney((prev) => prev + money[correctCount].amount)
-    correctSound()
+    // correctSound()
   }
 
   const timeOut = () => {
     
     setMessage('Time\'s up!')
   
-    setQuestionNumber((prev) => prev + 1)
-    wrongSound()
+    setQuestionNumber((prev) => {
+      if (prev < 9 ) {
+        return prev + 1
+      }
+    })
+    // wrongSound()
   }
 
   const handleClick = (answer) => {

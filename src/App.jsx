@@ -3,10 +3,11 @@ import { Route, Routes } from "react-router-dom"
 
 import { HomePage, CreateGame, JoinGame, WaitingRoom, Game, Result, Leaderboard, NotFound } from "./pages"
 import { Header, Footer, NavBar } from "./components"
-import { QuestionsProvider, SocketProvider } from "./context";
+import { QuestionsProvider, RoomProvider, SocketProvider } from "./context";
 const App = () => {
     return <QuestionsProvider>
                 <SocketProvider>
+                <RoomProvider>
                     <Routes>
                         <Route path="/" element={<><NavBar /><HomePage /><Footer /></>}></Route>
                         <Route path="/create" element={<><NavBar /><CreateGame /><Footer /></>}></Route>
@@ -17,7 +18,9 @@ const App = () => {
                         <Route path="/leaderboard" element={<><NavBar /><Leaderboard /><Footer /></>}></Route>
                         <Route path="*" element={<><NavBar /><NotFound /><Footer /></>}></Route>
                     </Routes>
+                </RoomProvider>
                 </SocketProvider>
+
             </QuestionsProvider>
 }
 
