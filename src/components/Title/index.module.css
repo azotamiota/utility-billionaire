@@ -1,7 +1,7 @@
 .neonText {
     color: black;
     font-family: 'Permanent Marker', cursive;
-    font-size: 4rem;
+    font-size: 2rem;
     text-shadow: 
         -0.2rem -0.2rem 1rem #fff,
         0.2rem 0.2rem 1rem #fff,
@@ -10,4 +10,10 @@
         0 0 6rem #c49a67,
         0 0 8rem #c49a67,
         0 0 10rem #c49a67;
+}
+
+@media (min-width: 990px) {
+    .neonText {
+        font-size: 4rem;
+    }
 }
