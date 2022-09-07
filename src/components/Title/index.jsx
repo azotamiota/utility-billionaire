@@ -3,7 +3,7 @@ import styles from './index.module.css'
 
 function Title({classVariant='neonText', children}) {
   return (
-    <div role="title" className={styles[`${classVariant}`]}>{children}</div>
+    <h1 role="title" className={styles[`${classVariant}`]}>{children}</h1>
   )
 }
 

@@ -1,9 +1,14 @@
 import React, {useContext, useEffect, useState } from 'react'
 import styles from './index.module.css'
+//import io from 'socket.io-client';
 
-import { Button, Container, UserCard } from "../../components"
+import { Button, Container, UserCard, Title } from "../../components"
 import { SocketContext, useQuestions } from '../../context';
 import { useNavigate } from 'react-router-dom';
+
+// const url = 'https://utility-billionaire.herokuapp.com'    // uncomment that you want to use as backend server
+//const url = 'http://localhost:5000' 
+//const socket = io.connect(url)
 
 function WaitingRoom() {
   const { data, setData } = useQuestions()
@@ -21,11 +26,13 @@ function WaitingRoom() {
     console.log(data)
     setPlayers(arr)
   })
+  socket.on('begin', () => {
+    navigateTo('/game')
+  })
 
   const startGame = () => {
     console.log("this should start the game!")
-    navigateTo('/game')
-
+    socket.emit('start_game')
   }
   useEffect(() => {
     console.log(players)
@@ -33,7 +40,7 @@ function WaitingRoom() {
 
   return (
     <div>
-      <h1>Room name</h1> {/*should display actual room name!*/}
+      <Title>Room name</Title> {/*should display actual room name!*/}
       {players.length === 4 ? <h2>You're lobby is ready to play!</h2> : <h2>Waiting for more players...</h2>}
       <Container>
         {players.map((p, i) => <UserCard key={i} username={p} classVariant='normal'/>)}

@@ -1,9 +1,17 @@
 body {
     margin: 0;
+    width: 100vw;
     min-height: 100vh;
+    background-image: url("./assets/background.jpg");
+    background-position: center;
+
+  /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-#background-video {
+/* #background-video {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
@@ -13,4 +21,4 @@ body {
     top: 0;
     bottom: 0;
     z-index: -1;
-}
+} */
