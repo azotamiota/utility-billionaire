@@ -12,6 +12,12 @@
         0 0 10rem #c49a67;
 }
 
+@media (min-width: 800px) {
+    .neonText {
+        font-size: 3rem;
+    }
+}
+
 @media (min-width: 990px) {
     .neonText {
         font-size: 4rem;

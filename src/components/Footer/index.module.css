@@ -22,3 +22,9 @@ p {
         0 0 8rem #08f,
         0 0 10rem #08f;
 }
+
+@media (min-width: 800px) {
+    p {
+        font-size: 1rem;
+    }
+}
