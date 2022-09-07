@@ -35,12 +35,11 @@ function Result() {
   }, [])
   const orderedPlayers = sortByKey(players, 'score')
   return (
-    <div>
-      <h1>Welcome to results!!</h1>
+    <div className={styles.resultdiv}>
       <Container>
         <Confetti/>
         <Title>Results</Title>
-        {orderedPlayers.map(u => <UserCard username={u.username} score={u.score} key={u.id} />)}
+        {orderedPlayers.map(u => <UserCard username={u.username} score={u.score} key={u.id} classVariant="normal" />)}
       </Container>
     </div>
   )

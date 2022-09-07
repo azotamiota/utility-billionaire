@@ -16,7 +16,7 @@ const Timer = ({ timeOut, questionNumber }) => {
   }, [timer, timeOut]);
 
   useEffect(() => {
-    setTimer(30);
+    setTimer(5000);
   }, [questionNumber]); 
   
   return ( <>
