@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from "react-router-dom"
 import styles from './index.module.css'
 
-import Button from "../../components/Button"
+import {Button, Title} from "../../components"
 
 function HomePage() {
 
@@ -11,9 +11,9 @@ function HomePage() {
   return (
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
-        <h1>Utility Billionaire</h1>
-        <Button text="Join Game" handleClick={() => navigate("/join")} classVariant={"neonText"}/>
-        <Button text="Create Game" handleClick={() => navigate("/create")} classVariant={"neonText"}/>
+        <Title>Utility Billionaire</Title>
+        <Button text="Join Game" handleClick={() => navigate("/join")} classVariant="neonText"/>
+        <Button text="Create Game" handleClick={() => navigate("/create")} classVariant="neonText"/>
       </div>
     </div>
   )

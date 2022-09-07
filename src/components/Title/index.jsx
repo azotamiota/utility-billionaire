@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './index.module.css'
 
-function Title({classVariant, children}) {
+function Title({classVariant='neonText', children}) {
   return (
-    <div role="title" className={styles[`${classVariant}`]}>{children}</div>
+    <h1 role="title" className={styles[`${classVariant}`]}>{children}</h1>
   )
 }
 

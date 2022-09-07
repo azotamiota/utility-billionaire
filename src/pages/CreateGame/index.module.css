@@ -1,0 +1,42 @@
+.root {
+    margin-top: 2%;
+}
+
+label {
+    text-align: center;
+    width: 100%;
+    font-family: 'Permanent Marker', cursive;
+    color: black;
+    font-size: 1.5rem;
+    margin-bottom: 1%;
+}
+
+select, input[type=text] {
+    outline: none;
+    color: white;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1rem;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: transparent;
+    box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #fff,
+        0 0 2rem #08f,
+        0 0 0.8rem #08f,
+        0 0 2.8rem #08f,
+        inset 0 0 1.3rem #08f; 
+}
+
+select option {
+    color: black;
+    background-color: #82caff;
+}
+
+select:focus, input[type=text]:focus {
+    box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #fff,
+        0 0 2rem #c49a67,
+        0 0 0.8rem #c49a67,
+        0 0 2.8rem #c49a67,
+        inset 0 0 1.3rem #c49a67;
+}
