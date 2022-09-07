@@ -5,7 +5,7 @@
 *https://utility-billionare.netlify.app/*
 <p>&nbsp</p>
 
-## Table of Contents :page_with_curl
+## Table of Contents :page_with_curl:
 
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
