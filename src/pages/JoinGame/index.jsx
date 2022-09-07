@@ -21,8 +21,8 @@ function JoinGame() {
     <div>
       <Title>Join a game!</Title>
       <Container>
-        <Input type='text' classVariant='light' name='room' defaultValue={currentRoom} onChange={(e) => setCurrentRoom(e.target.value)}>Room Name</Input>
-        <Input type='text' classVariant='light' name='room' defaultValue={username} onChange={(e) => setUsername(e.target.value)}>Username</Input>
+        <Input type='text' classVariant='light' name='room' defaultValue={currentRoom} onChange={(e) => setCurrentRoom(e.target.value)}>Game Room</Input>
+        <Input type='text' classVariant='light' name='room' defaultValue={username} onChange={(e) => setUsername(e.target.value)}>Player</Input>
         <Button text='Join' handleClick={joinGame} classVariant='neonText'/>
       </Container>
     </div>

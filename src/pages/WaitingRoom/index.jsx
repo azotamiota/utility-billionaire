@@ -13,8 +13,9 @@ import { useNavigate } from 'react-router-dom';
 function WaitingRoom() {
   const { data, setData } = useQuestions()
 
- const { players } = useRoom();
+ const { players, room } = useRoom();
  const [currentPlayers, setCurrentPlayers] = players
+ 
  
  const socket = useContext(SocketContext);
 
@@ -44,8 +45,8 @@ function WaitingRoom() {
 
   return (
     <div>
-      <Title>Room name</Title> {/*should display actual room name!*/}
-      {currentPlayers && currentPlayers.length === 4 ? <h2>You're lobby is ready to play!</h2> : <h2>Waiting for more players...</h2>}
+      <Title>{room}</Title> {/*should display actual room name!*/}
+      {currentPlayers && currentPlayers.length > 0 ? <h2>Ready to play!</h2> : <h2>Waiting for more players...</h2>}
       <Container>
         {currentPlayers && currentPlayers.map((p, i) => <UserCard key={i} username={p} classVariant='normal'/>)}
         <Button text="Start" handleClick={startGame} classVariant="neonText"/>
