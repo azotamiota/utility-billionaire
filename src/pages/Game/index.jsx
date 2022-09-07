@@ -100,21 +100,25 @@ function Game() {
     }
   }
 
+  
+
   return (
-    <div>
-      <Title>Welcome to Utility Billionaire Game!!</Title>
-      <Timer timeOut={() => timeOut()} questionNumber={questionNumber}/>
+    <>
+    <Timer timeOut={() => timeOut()} questionNumber={questionNumber}/>
+    <div className={styles.gamediv}>
       <Container>
-        <TotalMoney><h3>{questionNumber + 1}. Question</h3> for £{money[correctCount].amount}</TotalMoney>
+        {/* <TotalMoney><h3>{questionNumber + 1}. Question</h3> for £{money[correctCount].amount}</TotalMoney> */}
         <Title classVariant='question'>{data[questionNumber].question}</Title>
         {[...data[questionNumber].incorrect_answers, ' ' + data[questionNumber].correct_answer + ' '] // all answers in one array, this line makes an extra " " around the correct answer 
             .sort(() => Math.random() - 0.5)
             // as answers appear on buttons, the correct will appear like others by getting the space around trimmed
-            .map((answer) => <Button key={Math.random()} handleClick={() => handleClick(answer)} text={answer.trim()} classVariant='answer'/>)} 
+            .map((answer) => <Button key={Math.random()} handleClick={() => handleClick(answer)} text={answer.trim()} classVariant='neonText'/>)} 
       </Container>
-      <TotalMoney>Total: ${currentMoney}</TotalMoney>
-      <Message>{message}</Message>
+      {/* <TotalMoney>Total: ${currentMoney}</TotalMoney> */}
+      {/* <Message>{message}</Message> */}
+      {/* here i want to implement a "cash" animation on the page instead of message */}
     </div>
+    </>
   )
 }
 

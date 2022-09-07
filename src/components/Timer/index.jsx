@@ -1,5 +1,7 @@
 import React, {useEffect, useState } from 'react'
 
+import styles from './index.module.css'
+
 const Timer = ({ timeOut, questionNumber }) => {
 
   
@@ -14,12 +16,12 @@ const Timer = ({ timeOut, questionNumber }) => {
   }, [timer, timeOut]);
 
   useEffect(() => {
-    setTimer(15);
+    setTimer(30);
   }, [questionNumber]); 
   
   return ( <>
-    <h4>Time to answer:</h4>
-    <div className='timer'>{timer > 9 ? timer : `0`+timer}</div>
+    {/* <h4>Time to answer:</h4> */}
+    <div className={styles.timer}>{timer > 9 ? timer : `0`+timer}</div>
   </>
   )
 }
