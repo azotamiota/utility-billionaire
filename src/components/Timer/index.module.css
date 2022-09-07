@@ -22,5 +22,19 @@
         0 0 0.8rem #08f,
         0 0 2.8rem #08f,
         inset 0 0 1.3rem #08f;
-       
+}
+
+@media (min-width: 990px) {
+    .timer {
+        margin-left: 25%;
+        margin-top: 50px;
+        font-size: 2rem;
+        width: 50px;
+    }
+}
+
+@media (min-width: 600px) {
+    .timer {
+        margin-left: 15%;
+    }
 }
