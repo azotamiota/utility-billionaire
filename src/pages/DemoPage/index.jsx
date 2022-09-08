@@ -4,19 +4,18 @@ import styles from './index.module.css'
 
 import {Button, Title} from "../../components"
 
-function HomePage() {
+function DemoPage() {
 
   const navigate = useNavigate()
 
   return (
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
-        <Title>Utility Billionaire</Title>
-        <Button text="An app to make you rich in 2 minutes" handleClick={() => navigate("/team")} classVariant="neonText"/>
+        <Title>Live Demo</Title>
+        <a href="https://utility-billionare.netlify.app/"><Button text="Utility Billionaire" classVariant="neonText"/></a>
       </div>
     </div>
   )
 }
 
-export default HomePage
-
+export default DemoPage

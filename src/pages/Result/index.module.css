@@ -1,9 +1,0 @@
-.resultdiv {
-    margin-top: 150px;
-}
-
-@media (min-width: 990px) {
-    .resultdiv {
-        margin-top: 100px;
-    }    
-}

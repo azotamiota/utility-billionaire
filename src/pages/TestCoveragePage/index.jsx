@@ -4,19 +4,17 @@ import styles from './index.module.css'
 
 import {Button, Title} from "../../components"
 
-function HomePage() {
+function TestCoveragePage() {
 
   const navigate = useNavigate()
 
   return (
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
-        <Title>Utility Billionaire</Title>
-        <Button text="An app to make you rich in 2 minutes" handleClick={() => navigate("/team")} classVariant="neonText"/>
+        <Title>Test Coverage</Title>
       </div>
     </div>
   )
 }
 
-export default HomePage
-
+export default TestCoveragePage

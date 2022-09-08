@@ -1,0 +1,39 @@
+.outerContainer {
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 700px;
+}
+
+.innerContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 3%;
+}
+
+a {
+    width: 300px;
+}
+
+@media (min-width: 800px) {
+    .outerContainer {
+        margin-top: 6%;
+    }
+}
+
+@media (min-width: 991px) {
+    .outerContainer {
+        margin-top: 1%;
+    }
+}
+
+@media (min-width: 1500px) {
+    .outerContainer {
+        margin-top: 0;
+    }
+}
