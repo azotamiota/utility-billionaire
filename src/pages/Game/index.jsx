@@ -45,13 +45,13 @@ function Game() {
   const navigate = useNavigate()
   const correctAnswerMessages = [
       'You did well. Still shouldn\'t use the kettle too often...', 
-      'Good job, now you can buy a slice of bread',
+      'Good job, now you can buy a slice of bread.',
       'Not bad, but still not enough to beat inflation..',
-      'Well done! Now you might be able buy one full litre of diesel',
-      'Hmm, good.. Maybe this weekend begging at the corner won\'t be needed',
-      'Wow, nice! You might be able to reduce your debt to -£10,000',
-      'Good one! Let\'s spend some Universal Credit',
-      'Quite good, pal! The bank might not take your house this month',
+      'Well done! Now you might be able buy one full litre of diesel.',
+      'Hmm, good.. Maybe this weekend begging at the corner won\'t be needed.',
+      'Wow, nice! You might be able to reduce your debt to -£10,000.',
+      'Good one! Let\'s spend some Universal Credit.',
+      'Quite good, pal! The bank might not take your house this month.',
       'Woohoo! Finally you can top up your SIM after 6 months!',
       'Yaaay! Finally you can turn the light on while having dinner!'
       ]
@@ -59,7 +59,7 @@ function Game() {
       'You suck! Who will pay for your phone bill?!', 
       'OMG! This was an elementery school level question!',
       'Nah... start begging money for a hot shower!',
-      'You\'re going to freeze this winter',
+      'You\'re going to freeze this winter.',
       'Stock up some candles! You won\'t have money to pay for electricity',
       'I\'d buy some tinned food if I was you. No hot food next month...',
       'Surely can\'t pay the rent next month, let\'s buy a cheap tent!',
@@ -135,10 +135,9 @@ function Game() {
         <Title classVariant='question'>{`${questionNumber + 1}. ${data[questionNumber].question}`}</Title>
         {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={ (() => {
             if (revealAnswer && answer[0] == " ") {
-              return 'neonText-correct'
+              return answerChosen.current === 'none' ? 'neonText-correct-flash' : 'neonText-correct'
             }
             if (revealAnswer && answer[0] !== " ") {
-              console.log('after revealAnswer incorrect answers class:  the answerChosen.index: ', answerChosen.current, 'index:', index)
               return answerChosen.current === index ? 'neonText-incorrect' : 'neonText'
             }
             return answerChosen.current === index ? 'neonText-clicked' : 'neonText'
