@@ -129,10 +129,11 @@ function Game() {
   return (
     <>
     <Timer timeOut={() => timeOut()} questionNumber={questionNumber}/>
+    <TotalMoney divName="totalMoneyDiv"><h3>Total: £{currentMoney}</h3></TotalMoney>
     <div className={styles.gamediv}>
       <Container>
-        {/* <TotalMoney><h3>{questionNumber + 1}. Question</h3> for £{money[correctCount].amount}</TotalMoney> */}
         <Title classVariant='question'>{`${questionNumber + 1}. ${data[questionNumber].question}`}</Title>
+        <TotalMoney divName="questionMoneyDiv"><h3>£{money[correctCount].amount}</h3></TotalMoney>
         {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={ (() => {
             if (revealAnswer && answer[0] == " ") {
               return answerChosen.current === 'none' || answerChosen.current !== index ? 'neonText-correct' : 'neonText-correct-flash'
@@ -146,9 +147,7 @@ function Game() {
 
           }/>)} 
       </Container>
-      {/* <TotalMoney>Total: ${currentMoney}</TotalMoney> */}
       <Title classVariant='question'>{message}</Title>
-      {/* here i want to implement a "cash" animation on the page instead of message */}
     </div>
     </>
   )

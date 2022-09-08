@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './index.module.css'
 
-function TotalMoney({children}) {
+function TotalMoney({children, divName}) {
   return (
-    <div role="score">{children}</div>
+    <div role="score" className={styles[`${divName}`]}>{children}</div>
   )
 }
 
