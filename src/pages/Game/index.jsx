@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect, useRef} from 'react'
+import React, {useState, useContext, useEffect, useRef, useReducer} from 'react'
 import { useNavigate } from 'react-router-dom';
 import useSound from "use-sound";
 
@@ -21,7 +21,7 @@ function Game() {
   const currentAnswer = useRef('')
   const [randomisedAnswerList, setRandomisedAnswerList] = useState([])
   const [questionNumber, setQuestionNumber] = useState(0);
-  const [answerChosen, setAnswerChosen] = useState({index: 'none'})
+  const answerChosen = useRef('none')
   const [revealAnswer, setRevealAnswer] = useState(false)
   const [message, setMessage] = useState('');
   const [currentMoney, setCurrentMoney] = useState(0)
@@ -41,7 +41,7 @@ function Game() {
         { id: 9, amount: 50000 },
         { id: 10, amount: 100000 }
       ]
-  
+  const [, forceUpdate] = useReducer(x => x + 1, 0)
   const navigate = useNavigate()
   
   useEffect(() => {
@@ -103,25 +103,26 @@ function Game() {
   }
 
   const timeOut = () => {
-    if (answerChosen.index !== 'none') {
+    if (answerChosen.current !== 'none') {
       if (currentAnswer.current.trim() !== currentAnswer.current) { // this is how the program distinguish which one is the correct answer. See explanation below in comments
         correct()
       } else {
         wrong()
       }
-      setAnswerChosen({index: 'none'})
+      // setAnswerChosen({index: 'none'})
     }
 
     setMessage('Time\'s up!')
     setRevealAnswer(true)
     setTimeout(() => {
       // flashing animation with the correct answer
+      setRevealAnswer(false)
       setQuestionNumber((prev) => {
         if (prev < 9 ) {
           return prev + 1
         }
       })
-      setAnswerChosen({index: 'none'})
+      answerChosen.current = 'none'
 
     }, 5000)
     // wrongSound()
@@ -131,8 +132,9 @@ function Game() {
     console.log('button has clicked')
     e.preventDefault()
     // e.target.style.backgroundColor = 'red'
-    setAnswerChosen({ index })
     currentAnswer.current = answer
+    answerChosen.current = index
+    forceUpdate()
   }
   useEffect(() => {
     setRandomisedAnswerList([...data[questionNumber].incorrect_answers, ' ' + data[questionNumber].correct_answer + ' '].sort(() => Math.random() - 0.5))
@@ -145,18 +147,16 @@ function Game() {
       <Container>
         {/* <TotalMoney><h3>{questionNumber + 1}. Question</h3> for £{money[correctCount].amount}</TotalMoney> */}
         <Title classVariant='question'>{data[questionNumber].question}</Title>
-        {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={ () => {
+        {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={ (() => {
             if (revealAnswer && answer[0] == " ") {
               return 'neonText-correct'
             }
             if (revealAnswer && answer[0] !== " ") {
-              return 'neonText'
+              console.log('after revealAnswer incorrect answers class:  the answerChosen.index: ', answerChosen.current, 'index:', index)
+              return answerChosen.current === index ? 'neonText-incorrect' : 'neonText'
             }
-            if (revealAnswer && answerChosen.index === index && answer[0] !== " ") {
-              return 'neonText-incorrect'
-            }
-            return answerChosen.index === index ? 'neonText-clicked' : 'neonText'
-          }
+            return answerChosen.current === index ? 'neonText-clicked' : 'neonText'
+          })()
 
 
           }/>)} 
