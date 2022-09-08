@@ -12,7 +12,8 @@
   describe("UserCard", () => {
 
     beforeEach(() => {
-        render(<BrowserRouter><UserCard /></BrowserRouter>)
+        const mockData = [{username: 'aga', room: 12}]
+        render(<BrowserRouter><UserCard currentPlayers={mockData} /></BrowserRouter>)
     })
  
      it("Renders the username for a player", () => {

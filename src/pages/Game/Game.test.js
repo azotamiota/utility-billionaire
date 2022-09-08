@@ -7,12 +7,23 @@ import { screen, render } from '@testing-library/react';
  import React from 'react';
  import userEvent from '@testing-library/user-event';
  import { BrowserRouter } from 'react-router-dom';
+ import { QuestionsProvider, RoomProvider, SocketProvider } from "../../context";
  import Game from '.';
 
  describe("Game page", () => {
 
     beforeEach(() => {
-        render(<BrowserRouter><Game /></BrowserRouter>)
+        render(
+            <QuestionsProvider>
+                <SocketProvider>
+                    <RoomProvider>
+                        <BrowserRouter>
+                            <Game />
+                        </BrowserRouter>
+                    </RoomProvider>
+                </SocketProvider>
+            </QuestionsProvider>
+        )
     })
 
     it("Displays a navbar with appropriate text", () => {
