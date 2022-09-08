@@ -8,6 +8,7 @@
  import userEvent from '@testing-library/user-event';
  import { BrowserRouter } from 'react-router-dom';
  import Leaderboard from '.';
+ import axios from 'axios'
 
  describe("JoinGame page", () => {
 
@@ -25,7 +26,7 @@
 
     it("Displays an H1 with appropriate text", () => {
 
-        const heading = screen.queryByRole("heading");
+        const heading = screen.queryByText("Leaderboard");
 
         expect(heading).toBeInTheDocument();
 
@@ -39,12 +40,12 @@
         expect(button.getAttribute("class")).toBe("");
     })
 
-    it("Displays a footer with appropriate text", () => {
 
-        const footer = screen.queryByRole("footer");
-
-        expect(footer).toBeInTheDocument();
-
+    it("Gets the leaderboard", async () => {
+        
+        const leaderboard = await axios.get('https://utility-billionaire.herokuapp.com/leaderboard')
+        
+        expect(leaderboard).toContain("/leaderboard")
     })
 
 })
