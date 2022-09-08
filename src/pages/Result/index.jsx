@@ -29,35 +29,32 @@ function Result() {
 
   socket.on('final_scores', data => {
     console.log('final results are coming in: ', data);
-    console.log('players before: ', players);
+    // console.log('players before: ', players);
     setPlayers(data)
-    console.log('players after: ', players);
+    // console.log('players after: ', players);
   })
 
-  
-  let orderedPlayers = []
-  
-  // useEffect(() => {
-  //   orderedPlayers = sortByKey(players, 'score')
-  // }, [players])
+
+  useEffect(() => {
+    const url = 'https://utility-billionaire.herokuapp.com/results'
+    console.log('players before sending to database:', players)
+    players.map(player => {
+      axios.post(url, {
+          username: player.username,
+          score: player.score
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    })
+  }, [players])
   
   useEffect(() => {
-
     socket.emit('page_loaded', currentRoom)
     socket.emit('finish_game', {username, room:currentRoom})
-    const url = 'https://utility-billionaire.herokuapp.com/results'
-    // players.map(player => {
-    //   axios.post(url, {
-    //     username: player.username,
-    //     score: player.score,
-    //   })
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-    // })
   }, [])
 
 
