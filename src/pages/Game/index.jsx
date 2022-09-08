@@ -145,10 +145,19 @@ function Game() {
       <Container>
         {/* <TotalMoney><h3>{questionNumber + 1}. Question</h3> for £{money[correctCount].amount}</TotalMoney> */}
         <Title classVariant='question'>{data[questionNumber].question}</Title>
-        {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={
-          revealAnswer && answer[0] === " " ? 'neonText-correct' : 'neonText'
+        {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={ () => {
+            if (revealAnswer && answer[0] == " ") {
+              return 'neonText-correct'
+            }
+            if (revealAnswer && answer[0] !== " ") {
+              return 'neonText'
+            }
+            if (revealAnswer && answerChosen.index === index && answer[0] !== " ") {
+              return 'neonText-incorrect'
+            }
+            return answerChosen.index === index ? 'neonText-clicked' : 'neonText'
+          }
 
-          // answerChosen.index === index ? 'neonText-clicked' : 'neonText'
 
           }/>)} 
       </Container>
