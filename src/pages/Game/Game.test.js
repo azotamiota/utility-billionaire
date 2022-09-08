@@ -4,25 +4,28 @@
 
 import { screen, render } from '@testing-library/react';
  import '@testing-library/jest-dom';
- import React from 'react';
+ import React , {createContext, useContext} from 'react';
  import userEvent from '@testing-library/user-event';
  import { BrowserRouter } from 'react-router-dom';
- import { QuestionsProvider, RoomProvider, SocketProvider } from "../../context";
+ import { QuestionsProvider, RoomProvider, SocketProvider, useQuestions} from "../../context";
  import Game from '.';
 
  describe("Game page", () => {
 
     beforeEach(() => {
+        const data = [{question: 1}]
+        const setData = () => {}
+const QuestionsContext = createContext({data, setData});
         render(
-            <QuestionsProvider>
-                <SocketProvider>
+            <QuestionsContext.Provider value={[{question: 'asd'}]}>
+            <SocketProvider>
                     <RoomProvider>
                         <BrowserRouter>
                             <Game />
                         </BrowserRouter>
                     </RoomProvider>
                 </SocketProvider>
-            </QuestionsProvider>
+            </QuestionsContext.Provider>
         )
     })
 

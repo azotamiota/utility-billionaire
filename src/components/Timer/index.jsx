@@ -21,7 +21,7 @@ const Timer = ({ timeOut, questionNumber }) => {
   
   return ( <>
     {/* <h4>Time to answer:</h4> */}
-    <div className={styles.timer}>{timer > 9 ? timer : `0`+timer}</div>
+    <div role='timer' className={styles.timer}>{timer > 9 ? timer : `0`+timer}</div>
   </>
   )
 }

@@ -4,7 +4,7 @@ import io from 'socket.io-client'
 const QuestionsContext = createContext();
 
 export const QuestionsProvider = ({ children }) => {
-    const [ data, setData ] = useState();
+    const [ data, setData ] = useState([]);
     
     return (
         <QuestionsContext.Provider value={{ data, setData }}>
@@ -16,7 +16,7 @@ export const QuestionsProvider = ({ children }) => {
 export const useQuestions = () => useContext(QuestionsContext);
 
 
-const url = 'http://localhost:7000' 
+const url = 'http://localhost:5000' 
 // const url = 'https://utility-billionaire.herokuapp.com/' 
 
 export const socket = io.connect(url)
@@ -33,9 +33,9 @@ export const SocketProvider = ({children}) => {
 const RoomContext = createContext();
 
 export const RoomProvider = ({ children }) => {
-    const [ room, setRoom ] = useState();
+    const [ room, setRoom ] = useState('');
     const [ players, setPlayers ] = useState([]);
-    const [ currentUser, setCurrentUser ] = useState();
+    const [ currentUser, setCurrentUser ] = useState('');
     
     return (
         <RoomContext.Provider value={{ room: [room, setRoom], players: [players, setPlayers], currentUser: [currentUser, setCurrentUser] }}>
