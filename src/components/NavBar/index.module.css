@@ -23,13 +23,14 @@
 }
 
 .mobileNavLinksContainer {
+    padding-top: 20px;
     position: fixed;
     top: 0;
     left: 0;
     width: 30vw;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     background-color: black;
@@ -148,6 +149,10 @@ a {
         width: 100%;
         right: 0;
         /* background-color: grey; */
+    }
+
+    a {
+        font-size: 1rem;
     }
 
 }
