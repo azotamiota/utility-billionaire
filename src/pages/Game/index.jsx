@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useContext, useEffect, useRef} from 'react'
 import { useNavigate } from 'react-router-dom';
 import useSound from "use-sound";
 
@@ -10,17 +10,18 @@ import { useQuestions, SocketContext, useRoom } from '../../context';
 
 
 function Game() {
-
+  
   const socket = useContext(SocketContext)
   const { room, players, currentUser } = useRoom();
   const [currentRoom, setCurrentRoom] = room
   const [currentPlayers, setCurrentPlayers] = players
   const [username, setUsername] = currentUser
-
-  const [questionNumber, setQuestionNumber] = useState(0);
-  const { data } = useQuestions()
-  // console.log('data: ', data)
   
+  const { data } = useQuestions()
+  const currentAnswer = useRef('')
+  const [randomisedAnswerList, setRandomisedAnswerList] = useState([])
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const [answerChosen, setAnswerChosen] = useState({index: 'none'})
   const [message, setMessage] = useState('');
   const [currentMoney, setCurrentMoney] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
@@ -67,8 +68,8 @@ function Game() {
     setMessage(wrongAnswerMessages[Math.floor(Math.random() * wrongAnswerMessages.length)])
     
     console.log('this is the wrong answer')
-    setQuestionNumber((prev) => prev + 1)
-    // wrongSound()
+    // setQuestionNumber((prev) => prev + 1)
+    wrongSound()
   }
 
   const correct = () => {
@@ -88,39 +89,52 @@ function Game() {
 
     setMessage(correctAnswerMessages[Math.floor(Math.random() * correctAnswerMessages.length)])
        
-    setQuestionNumber((prev) => {
-      if (prev < 9 ) {
-        return prev + 1
-      }
-    })
+    // setQuestionNumber((prev) => {
+    //   if (prev < 9 ) {
+    //     return prev + 1
+    //   }
+    // })
 
     setCorrectCount((prev) => prev + 1)
     
     setCurrentMoney((prev) => prev + money[correctCount].amount)
-    // correctSound()
+    correctSound()
   }
 
   const timeOut = () => {
-    
-    setMessage('Time\'s up!')
-  
-    setQuestionNumber((prev) => {
-      if (prev < 9 ) {
-        return prev + 1
+    if (answerChosen.index !== 'none') {
+      if (currentAnswer.current.trim() !== currentAnswer.current) { // this is how the program distinguish which one is the correct answer. See explanation below in comments
+        correct()
+      } else {
+        wrong()
       }
-    })
+      setAnswerChosen({index: 'none'})
+    }
+
+    setMessage('Time\'s up!')
+    setTimeout(() => {
+      // flashing animation with the correct answer
+      setQuestionNumber((prev) => {
+        if (prev < 9 ) {
+          return prev + 1
+        }
+      })
+      setAnswerChosen({index: 'none'})
+
+    }, 5000)
     // wrongSound()
   }
 
-  const handleClick = (answer) => {
-    if (answer.trim() !== answer) { // this is how the program distinguish which one is the correct answer. See explanation below in comments
-      correct()
-    } else {
-      wrong()
-    }
+  const handleClick = (e, index, answer) => {
+    console.log('button has clicked')
+    e.preventDefault()
+    // e.target.style.backgroundColor = 'red'
+    setAnswerChosen({ index })
+    currentAnswer.current = answer
   }
-
-  
+  useEffect(() => {
+    setRandomisedAnswerList([...data[questionNumber].incorrect_answers, ' ' + data[questionNumber].correct_answer + ' '].sort(() => Math.random() - 0.5))
+  }, [questionNumber])
 
   return (
     <>
@@ -129,13 +143,10 @@ function Game() {
       <Container>
         {/* <TotalMoney><h3>{questionNumber + 1}. Question</h3> for £{money[correctCount].amount}</TotalMoney> */}
         <Title classVariant='question'>{data[questionNumber].question}</Title>
-        {[...data[questionNumber].incorrect_answers, ' ' + data[questionNumber].correct_answer + ' '] // all answers in one array, this line makes an extra " " around the correct answer 
-            .sort(() => Math.random() - 0.5)
-            // as answers appear on buttons, the correct will appear like others by getting the space around trimmed
-            .map((answer) => <Button key={Math.random()} handleClick={() => handleClick(answer)} text={answer.trim()} classVariant='neonText'/>)} 
+        {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={answerChosen.index === index ? 'neonText-clicked' : 'neonText'}/>)} 
       </Container>
       {/* <TotalMoney>Total: ${currentMoney}</TotalMoney> */}
-      {/* <Message>{message}</Message> */}
+      <Message>{message}</Message>
       {/* here i want to implement a "cash" animation on the page instead of message */}
     </div>
     </>
