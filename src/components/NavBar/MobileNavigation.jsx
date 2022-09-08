@@ -15,7 +15,7 @@ const MobileNavigation = () => {
     return (
         <nav role="nav" className={styles.mobileNavBar}>
             {open ? closeIcon : hamburgerIcon}
-            {open && <NavLinks />}
+            {open && <NavLinks divName="mobileNavLinksContainer"/>}
         </nav>
     )
 }
