@@ -23,4 +23,9 @@
         }
 
     })
+
+    it("Displays 2 navlinks", () => {
+        const links = screen.getAllByRole("nav");
+        expect(links.length).toBe(2);
+    })
 })
