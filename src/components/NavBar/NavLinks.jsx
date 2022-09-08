@@ -6,7 +6,7 @@ import styles from "./index.module.css"
 const NavLinks = () => {
     const navigate = useNavigate()
     return (
-            <div className={styles.navLinksContainer}>
+            <div className={styles.navLinksContainer} data-testid='navlinks'>
                 <NavLink to="/" className={styles.neonText}>Home</NavLink>
                 <NavLink to="/create" className={styles.neonText}>New Game</NavLink>
                 <NavLink to="/leaderboard" className={styles.neonText}>Leaderboard</NavLink>

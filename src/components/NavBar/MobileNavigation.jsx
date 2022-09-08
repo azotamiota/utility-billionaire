@@ -13,7 +13,7 @@ const MobileNavigation = () => {
     const closeIcon = <IoCloseSharp className={styles.hamburger} size="40px" color="black" onClick={() => setOpen(!open)}/>
 
     return (
-        <nav role="nav" className={styles.mobileNavBar}>
+        <nav data-testid='navbar' role="nav" className={styles.mobileNavBar}>
             {open ? closeIcon : hamburgerIcon}
             {open && <NavLinks />}
         </nav>

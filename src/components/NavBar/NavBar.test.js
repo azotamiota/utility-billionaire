@@ -17,9 +17,10 @@
 
     it("Displays a navbar with appropriate text", () => {
 
-        const navbar = screen.queryByRole("nav");
-
-        expect(navbar).toBeInTheDocument();
+        const navbars = screen.queryAllByRole("nav");
+        for( let navbar of navbars) {
+            expect(navbar).toBeInTheDocument();
+        }
 
     })
 })

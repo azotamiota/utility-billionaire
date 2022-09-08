@@ -11,15 +11,31 @@
  
   describe("Input", () => {
 
-    beforeEach(() => {
-        render(<BrowserRouter><Input /></BrowserRouter>)
-    })
+    // beforeEach(() => {
+
+        
+    // })
  
      it("Renders an input", () => {
- 
+        const levels = [
+            {id: 1, name: 'easy', value: 'easy'},
+            {id: 2, name: 'medium', value: 'medium'},
+            {id: 3, name: 'hard', value: 'hard'},
+          ]
+        render(<BrowserRouter><Input defaultValue={levels}/></BrowserRouter>)
          const input = screen.getByRole("input");
  
          expect(input).toBeInTheDocument();
      })
+
+     it("Renders an option", () => {
+        const levels = [
+            {id: 1, name: 'easy', value: 'easy'}
+          ]
+        render(<BrowserRouter><Input type='select' defaultValue={levels}/></BrowserRouter>)
+        const input = screen.getByRole("option");
+ 
+        expect(input).toBeInTheDocument();
+    })
  
  })

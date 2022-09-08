@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
+    "test": "jest --verbose --watchAll --coverage",
     "dev": "vite --host",
     "build": "vite build",
     "coverage": "jest --coverage"
