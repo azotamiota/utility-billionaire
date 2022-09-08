@@ -44,28 +44,28 @@ function Game() {
   const [, forceUpdate] = useReducer(x => x + 1, 0)
   const navigate = useNavigate()
   const correctAnswerMessages = [
-      'You did well. Still shouldn\'t use the kettle too often...', 
+      'You did well. Still shouldn\'t use the kettle too often.', 
       'Good job, now you can buy a slice of bread.',
-      'Not bad, but still not enough to beat inflation..',
+      'Not bad, but still not enough to beat inflation.',
       'Well done! Now you might be able buy one full litre of diesel.',
       'Hmm, good.. Maybe this weekend begging at the corner won\'t be needed.',
       'Wow, nice! You might be able to reduce your debt to -£10,000.',
-      'Good one! Let\'s spend some Universal Credit.',
+      'Good one! Let\'s celebrate with a glass of water!',
       'Quite good, pal! The bank might not take your house this month.',
       'Woohoo! Finally you can top up your SIM after 6 months!',
       'Yaaay! Finally you can turn the light on while having dinner!'
       ]
   const wrongAnswerMessages = [
-      'You suck! Who will pay for your phone bill?!', 
+      'You failed! Who will pay for your phone bill?!', 
       'OMG! This was an elementery school level question!',
-      'Nah... start begging money for a hot shower!',
+      'Nah... start begging money for taking a hot shower!',
       'You\'re going to freeze this winter.',
-      'Stock up some candles! You won\'t have money to pay for electricity',
+      'Stock up some candles! You won\'t have money to pay for electricity.',
       'I\'d buy some tinned food if I was you. No hot food next month...',
-      'Surely can\'t pay the rent next month, let\'s buy a cheap tent!',
+      'Surely can\'t pay the rent next month, time to buy a tent!',
       'If you have to pay mortgage, start to worry, mate!',
       'Intermittent fasting is coming: One month eating, one month starving.',
-      'Buy a thick coat before winter. Your bedromm will be like an igloo',
+      'Buy a thick coat before winter. Your bedroom will be like an igloo',
       ]
 
   
@@ -135,7 +135,7 @@ function Game() {
         <Title classVariant='question'>{`${questionNumber + 1}. ${data[questionNumber].question}`}</Title>
         {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={ (() => {
             if (revealAnswer && answer[0] == " ") {
-              return answerChosen.current === 'none' ? 'neonText-correct-flash' : 'neonText-correct'
+              return answerChosen.current === 'none' || answerChosen.current !== index ? 'neonText-correct' : 'neonText-correct-flash'
             }
             if (revealAnswer && answer[0] !== " ") {
               return answerChosen.current === index ? 'neonText-incorrect' : 'neonText'
