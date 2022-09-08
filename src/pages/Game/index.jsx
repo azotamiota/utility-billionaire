@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useContext, useEffect, useRef, useReducer} from 'react'
 import { useNavigate } from 'react-router-dom';
 import useSound from "use-sound";
 
@@ -10,17 +10,19 @@ import { useQuestions, SocketContext, useRoom } from '../../context';
 
 
 function Game() {
-
+  
   const socket = useContext(SocketContext)
   const { room, players, currentUser } = useRoom();
   const [currentRoom, setCurrentRoom] = room
   const [currentPlayers, setCurrentPlayers] = players
   const [username, setUsername] = currentUser
-
-  const [questionNumber, setQuestionNumber] = useState(0);
-  const { data } = useQuestions()
-  // console.log('data: ', data)
   
+  const { data } = useQuestions()
+  const currentAnswer = useRef('')
+  const [randomisedAnswerList, setRandomisedAnswerList] = useState([])
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const answerChosen = useRef('none')
+  const [revealAnswer, setRevealAnswer] = useState(false)
   const [message, setMessage] = useState('');
   const [currentMoney, setCurrentMoney] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
@@ -39,8 +41,33 @@ function Game() {
         { id: 9, amount: 50000 },
         { id: 10, amount: 100000 }
       ]
-  
+  const [, forceUpdate] = useReducer(x => x + 1, 0)
   const navigate = useNavigate()
+  const correctAnswerMessages = [
+      'You did well. Still shouldn\'t use the kettle too often.', 
+      'Good job, now you can buy a slice of bread.',
+      'Not bad, but still not enough to beat inflation.',
+      'Well done! Now you might be able buy one full litre of diesel.',
+      'Hmm, good.. Maybe this weekend begging at the corner won\'t be needed.',
+      'Wow, nice! You might be able to reduce your debt to -£10,000.',
+      'Good one! Let\'s celebrate with a glass of water!',
+      'Quite good, pal! The bank might not take your house this month.',
+      'Woohoo! Finally you can top up your SIM after 6 months!',
+      'Yaaay! Finally you can turn the light on while having dinner!'
+      ]
+  const wrongAnswerMessages = [
+      'You failed! Who will pay for your phone bill?!', 
+      'OMG! This was an elementery school level question!',
+      'Nah... start begging money for taking a hot shower!',
+      'You\'re going to freeze this winter.',
+      'Stock up some candles! You won\'t have money to pay for electricity.',
+      'I\'d buy some tinned food if I was you. No hot food next month...',
+      'Surely can\'t pay the rent next month, time to buy a tent!',
+      'If you have to pay mortgage, start to worry, mate!',
+      'Intermittent fasting is coming: One month eating, one month starving.',
+      'Buy a thick coat before winter. Your bedroom will be like an igloo',
+      ]
+
   
   useEffect(() => {
     if (questionNumber === 9) {
@@ -50,91 +77,80 @@ function Game() {
     }
   }, [questionNumber])
 
-  const wrong = () => {
-    const wrongAnswerMessages = [
-      'You suck! Who will pay for your phone bill?!', 
-      'OMG! This was an elementery school level question!',
-      'Nah... start begging money for a hot shower!',
-      'You\'re going to freeze this winter',
-      'Stock up some candles! You won\'t have money to pay for electricity',
-      'I\'d buy some tinned food if I was you. No hot food next month...',
-      'Surely can\'t pay the rent next month, let\'s buy a cheap tent!',
-      'If you have to pay mortgage, start to worry, mate!',
-      'Intermittent fasting is coming: One month eating, one month starving.',
-      'Buy a thick coat before winter. Your bedromm will be like an igloo',
-      ]
-
+  const wrong = () => {    
     setMessage(wrongAnswerMessages[Math.floor(Math.random() * wrongAnswerMessages.length)])
-    
-    console.log('this is the wrong answer')
-    setQuestionNumber((prev) => prev + 1)
-    // wrongSound()
+    wrongSound()
   }
-
-  const correct = () => {
-
-    const correctAnswerMessages = [
-      'You did well. Still shouldn\'t use the kettle too often...', 
-      'Good job, now you can buy a slice of bread',
-      'Not bad, but still not enough to beat inflation..',
-      'Well done! Now you might be able buy one full litre of diesel',
-      'Hmm, good.. Maybe this weekend begging at the corner won\'t be needed',
-      'Wow, nice! You might be able to reduce your debt to -£10,000',
-      'Good one! Let\'s spend some Universal Credit',
-      'Quite good, pal! The bank might not take your house this month',
-      'Woohoo! Finally you can top up your SIM after 6 months!',
-      'Yaaay! Finally you can turn the light on while having dinner!'
-      ]
-
-    setMessage(correctAnswerMessages[Math.floor(Math.random() * correctAnswerMessages.length)])
-       
-    setQuestionNumber((prev) => {
-      if (prev < 9 ) {
-        return prev + 1
-      }
-    })
-
-    setCorrectCount((prev) => prev + 1)
-    
-    setCurrentMoney((prev) => prev + money[correctCount].amount)
-    // correctSound()
-  }
-
-  const timeOut = () => {
-    
-    setMessage('Time\'s up!')
   
-    setQuestionNumber((prev) => {
-      if (prev < 9 ) {
-        return prev + 1
+  const correct = () => {
+    setMessage(correctAnswerMessages[Math.floor(Math.random() * correctAnswerMessages.length)])
+    setCorrectCount((prev) => prev + 1)
+    setCurrentMoney((prev) => prev + money[correctCount].amount)
+    correctSound()
+  }
+  
+  const timeOut = () => {
+    if (answerChosen.current !== 'none') {
+      if (currentAnswer.current.trim() !== currentAnswer.current) { // this is how the program distinguish which one is the correct answer. See explanation below in comments
+        correct()
+      } else {
+        wrong()
       }
-    })
-    // wrongSound()
+    } else {
+      setMessage(wrongAnswerMessages[Math.floor(Math.random() * wrongAnswerMessages.length)])
+      wrongSound()
+    }
+
+    setRevealAnswer(true)
+    setTimeout(() => {
+      setRevealAnswer(false)
+      setQuestionNumber((prev) => {
+        if (prev < 9 ) {
+          return prev + 1
+        }
+      })
+      answerChosen.current = 'none'
+
+    }, 5000)
   }
 
-  const handleClick = (answer) => {
-    if (answer.trim() !== answer) { // this is how the program distinguish which one is the correct answer. See explanation below in comments
-      correct()
-    } else {
-      wrong()
-    }
+  const handleClick = (e, index, answer) => {
+    console.log('button has clicked')
+    e.preventDefault()
+    // e.target.style.backgroundColor = 'red'
+    currentAnswer.current = answer
+    answerChosen.current = index
+    forceUpdate()
   }
+  useEffect(() => {
+    setRandomisedAnswerList([...data[questionNumber].incorrect_answers, ' ' + data[questionNumber].correct_answer + ' '].sort(() => Math.random() - 0.5))
+  }, [questionNumber])
 
   return (
-    <div>
-      <Title>Welcome to Utility Billionaire Game!!</Title>
-      <Timer timeOut={() => timeOut()} questionNumber={questionNumber}/>
+    <>
+    <Timer timeOut={() => timeOut()} questionNumber={questionNumber}/>
+    <div className={styles.gamediv}>
       <Container>
-        <TotalMoney><h3>{questionNumber + 1}. Question</h3> for £{money[correctCount].amount}</TotalMoney>
-        <Title classVariant='question'>{data[questionNumber].question}</Title>
-        {[...data[questionNumber].incorrect_answers, ' ' + data[questionNumber].correct_answer + ' '] // all answers in one array, this line makes an extra " " around the correct answer 
-            .sort(() => Math.random() - 0.5)
-            // as answers appear on buttons, the correct will appear like others by getting the space around trimmed
-            .map((answer) => <Button key={Math.random()} handleClick={() => handleClick(answer)} text={answer.trim()} classVariant='answer'/>)} 
+        {/* <TotalMoney><h3>{questionNumber + 1}. Question</h3> for £{money[correctCount].amount}</TotalMoney> */}
+        <Title classVariant='question'>{`${questionNumber + 1}. ${data[questionNumber].question}`}</Title>
+        {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={ (() => {
+            if (revealAnswer && answer[0] == " ") {
+              return answerChosen.current === 'none' || answerChosen.current !== index ? 'neonText-correct' : 'neonText-correct-flash'
+            }
+            if (revealAnswer && answer[0] !== " ") {
+              return answerChosen.current === index ? 'neonText-incorrect' : 'neonText'
+            }
+            return answerChosen.current === index ? 'neonText-clicked' : 'neonText'
+          })()
+
+
+          }/>)} 
       </Container>
-      <TotalMoney>Total: ${currentMoney}</TotalMoney>
-      <Message>{message}</Message>
+      {/* <TotalMoney>Total: ${currentMoney}</TotalMoney> */}
+      <Title classVariant='question'>{message}</Title>
+      {/* here i want to implement a "cash" animation on the page instead of message */}
     </div>
+    </>
   )
 }
 

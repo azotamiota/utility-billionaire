@@ -6,7 +6,7 @@ function UserCard({ currentPlayers, classVariant}) {
   return (
       currentPlayers.map(player => {
       return (
-        <div role="username" key={Math.random()} className={styles[`${classVariant}`]}>
+        <div role="username" key={Math.random()} className={styles.normal}>
         <span>{player.username}</span>&nbsp;<span>{player.score}</span>
         </div>
       )

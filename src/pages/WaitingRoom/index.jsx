@@ -31,15 +31,15 @@ function WaitingRoom() {
   })
 
   const startGame = () => {
-    console.log("this should start the game!")
-    socket.emit('start_game')
+    console.log("this should start the game!", room)
+    socket.emit('start_game', room[0])
   }
   useEffect(() => {
     console.log(currentPlayers)
   }, [currentPlayers])
 
   return (
-    <div>
+    <div className={styles.waitingdiv}>
       <Title>{room}</Title> {/*should display actual room name!*/}
       {currentPlayers && currentPlayers.length > 0 ? <h2>Ready to play!</h2> : <h2>Waiting for more players...</h2>}
       <Container>

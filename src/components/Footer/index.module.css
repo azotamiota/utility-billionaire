@@ -8,7 +8,7 @@
 
 p {
     font-family: 'Exo 2', sans-serif;
-    font-size: 1.5rem;
+    font-size: 0.6rem;
     color: white;
 }
 
@@ -21,4 +21,10 @@ p {
         0 0 6rem #08f,
         0 0 8rem #08f,
         0 0 10rem #08f;
+}
+
+@media (min-width: 800px) {
+    p {
+        font-size: 1rem;
+    }
 }
