@@ -135,7 +135,7 @@ function Game() {
         <Title classVariant='question'>{`${questionNumber + 1}. ${data[questionNumber].question}`}</Title>
         {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={ (() => {
             if (revealAnswer && answer[0] == " ") {
-              return answerChosen.current === 'none' ? 'neonText-correct-flash' : 'neonText-correct'
+              return answerChosen.current === 'none' || answerChosen.current !== index ? 'neonText-correct' : 'neonText-correct-flash'
             }
             if (revealAnswer && answer[0] !== " ") {
               return answerChosen.current === index ? 'neonText-incorrect' : 'neonText'
