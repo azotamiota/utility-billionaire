@@ -16,7 +16,7 @@ export const QuestionsProvider = ({ children }) => {
 export const useQuestions = () => useContext(QuestionsContext);
 
 
-const url = 'http://localhost:5000' 
+const url = 'http://localhost:7000' 
 // const url = 'https://utility-billionaire.herokuapp.com/' 
 
 export const socket = io.connect(url)

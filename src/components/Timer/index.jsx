@@ -5,7 +5,8 @@ import styles from './index.module.css'
 const Timer = ({ timeOut, questionNumber }) => {
 
   
-  const [timer, setTimer] = useState(15);
+
+  const [timer, setTimer] = useState(5);
 
   useEffect(() => {
     if (timer === 0) return timeOut() 
@@ -13,10 +14,10 @@ const Timer = ({ timeOut, questionNumber }) => {
       setTimer((prev) => prev - 1);
     }, 1000);
     return () => clearInterval(interval);
-  }, [timer, timeOut]);
+  }, [timer]);
 
   useEffect(() => {
-    setTimer(3000000000000000);
+    setTimer(5);
   }, [questionNumber]); 
   
   return ( <>
