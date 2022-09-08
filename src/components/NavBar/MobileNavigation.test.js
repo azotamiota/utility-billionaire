@@ -23,6 +23,7 @@
         }
     })
         
+
         // test("If ParentComponent is not passed open, ChildComponent is not called", () => {
         //     const open = false
         //     const { getByRole, getAllByTestId } = render(<BrowserRouter><MobileNavigation /></BrowserRouter>).setState({open: false})
