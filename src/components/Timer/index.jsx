@@ -5,7 +5,7 @@ import styles from './index.module.css'
 const Timer = ({ timeOut, questionNumber }) => {
 
   
-  const [timer, setTimer] = useState(5);
+  const [timer, setTimer] = useState(10);
 
   useEffect(() => {
     if (timer === 0) return timeOut() 
@@ -16,7 +16,7 @@ const Timer = ({ timeOut, questionNumber }) => {
   }, [timer]);
 
   useEffect(() => {
-    setTimer(5);
+    setTimer(10);
   }, [questionNumber]); 
   
   return ( <>

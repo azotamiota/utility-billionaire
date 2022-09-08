@@ -22,6 +22,7 @@ function Game() {
   const [randomisedAnswerList, setRandomisedAnswerList] = useState([])
   const [questionNumber, setQuestionNumber] = useState(0);
   const [answerChosen, setAnswerChosen] = useState({index: 'none'})
+  const [revealAnswer, setRevealAnswer] = useState(false)
   const [message, setMessage] = useState('');
   const [currentMoney, setCurrentMoney] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
@@ -112,6 +113,7 @@ function Game() {
     }
 
     setMessage('Time\'s up!')
+    setRevealAnswer(true)
     setTimeout(() => {
       // flashing animation with the correct answer
       setQuestionNumber((prev) => {
@@ -143,7 +145,12 @@ function Game() {
       <Container>
         {/* <TotalMoney><h3>{questionNumber + 1}. Question</h3> for £{money[correctCount].amount}</TotalMoney> */}
         <Title classVariant='question'>{data[questionNumber].question}</Title>
-        {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={answerChosen.index === index ? 'neonText-clicked' : 'neonText'}/>)} 
+        {randomisedAnswerList.map((answer, index) => <Button key={index} handleClick={(e) => handleClick(e, index, answer)} text={answer.trim()} classVariant={
+          revealAnswer && answer[0] === " " ? 'neonText-correct' : 'neonText'
+
+          // answerChosen.index === index ? 'neonText-clicked' : 'neonText'
+
+          }/>)} 
       </Container>
       {/* <TotalMoney>Total: ${currentMoney}</TotalMoney> */}
       <Message>{message}</Message>
