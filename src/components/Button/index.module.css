@@ -20,10 +20,9 @@
 
 .neonText {
     width: 55%;
-    font-size: 1rem;
+    font-size: 1.5rem;  /* I removed the media query and set the font size permanent. It messed up with the of selected buttons' sizes */
     font-family: 'Exo 2', sans-serif;
     margin: 15px;
-    border: 1px solid white;
     background-color: transparent;
     color: #fff;
     border: 1px solid #fff;
@@ -43,7 +42,6 @@
         0 0 0.8rem #08f,
         0 0 2.8rem #08f,
         inset 0 0 1.3rem #08f;
-    /* animation: flicker 1.5s infinite alternate; */
 }
 
 .neonText:hover {
@@ -66,10 +64,9 @@
 
 .neonText-clicked {
     width: 55%;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-family: 'Exo 2', sans-serif;
     margin: 15px;
-    border: 1px solid white;
     background-color: lightblue;
     color: #fff;
     border: 1px solid #fff;
@@ -93,7 +90,7 @@
 
 .neonText-correct {
     width: 55%;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-family: 'Exo 2', sans-serif;
     margin: 15px;
     border: 1px solid white;
@@ -120,7 +117,7 @@
 
 .neonText-correct-flash {
     width: 55%;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-family: 'Exo 2', sans-serif;
     margin: 15px;
     border: 1px solid white;
@@ -143,10 +140,25 @@
         0 0 0.8rem lightgreen,
         0 0 2.8rem lightgreen,
         inset 0 0 1.3rem lightgreen;
-    animation: flashCorrect 1s infinite linear;
+    animation: flashCorrect 0.4s infinite linear;
 }
 
+/* I think this is a bit better flashing animation */
 @keyframes flashCorrect {
+
+    0% {
+        background-color: lightgreen;
+    }
+    50% {
+        background-color: transparent;
+    }
+    100% {
+        background-color: lightgreen;
+    }
+}
+
+/* @keyframes flashCorrect {
+
 
     0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% {
         background-color: lightgreen;
@@ -155,11 +167,11 @@
     5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% {
         background-color: green;
     }
-}
+} */
 
 .neonText-incorrect {
     width: 55%;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-family: 'Exo 2', sans-serif;
     margin: 15px;
     border: 1px solid white;
@@ -182,10 +194,23 @@
         0 0 0.8rem red,
         0 0 2.8rem red,
         inset 0 0 1.3rem red;
-    animation: flashIncorrect 1s infinite linear;
+    animation: flashIncorrect 0.4s infinite linear;
 }
 
 @keyframes flashIncorrect {
+
+    0% {
+        background-color: red;
+    }
+    50% {
+        background-color: transparent;
+    }
+    100% {
+        background-color: red;
+    }
+}
+
+/* @keyframes flashIncorrect {
 
     0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% {
         background-color: lightcoral;
@@ -194,7 +219,7 @@
     5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% {
         background-color: red;
     }
-}
+} */
 
 /* Animate neon text */
 
@@ -225,8 +250,8 @@
     }
 }
 
-@media (min-width: 800px) {
+/* @media (min-width: 800px) {
     .neonText {
-        font-size: 1.5rem;
+        font-size: 1.5.5rem;
     }
-}
+} */

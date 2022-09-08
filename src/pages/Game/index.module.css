@@ -9,7 +9,7 @@ h1 {
 
 @media (min-width: 990px) {
     .gamediv {
-        padding-top: 80px;
+        padding-top: 60px; /* I think it is pushed down a bit too much, I reduced from 80px */ 
         margin-top: 80px;
     }
 }
