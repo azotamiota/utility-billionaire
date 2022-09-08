@@ -6,7 +6,7 @@ import NavLinks from "./NavLinks";
 const DefaultNavigation = () => {
     return (
         <nav className={styles.navbar}>
-            <NavLinks />
+            <NavLinks divName="navLinksContainer"/>
         </nav>
     )
 }

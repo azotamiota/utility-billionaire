@@ -9,13 +9,13 @@ const MobileNavigation = () => {
 
     const [open, setOpen] = useState(false)
 
-    const hamburgerIcon = <IoMenuSharp className={styles.hamburger} size="40px" color="black" onClick={() => setOpen(!open)}/>
-    const closeIcon = <IoCloseSharp className={styles.hamburger} size="40px" color="black" onClick={() => setOpen(!open)}/>
+    const hamburgerIcon = <IoMenuSharp className={styles.hamburger} size="40px" color="white" onClick={() => setOpen(!open)}/>
+    const closeIcon = <IoCloseSharp className={styles.hamburger} size="40px" color="white" onClick={() => setOpen(!open)}/>
 
     return (
         <nav role="nav" className={styles.mobileNavBar}>
             {open ? closeIcon : hamburgerIcon}
-            {open && <NavLinks />}
+            {open && <NavLinks divName="mobileNavLinksContainer"/>}
         </nav>
     )
 }
