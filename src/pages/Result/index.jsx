@@ -4,12 +4,14 @@ import styles from './index.module.css'
 import axios from 'axios'
 // import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
-import { SocketContext } from '../../context'
+import { SocketContext, useRoom } from '../../context'
 
 function Result() {
 
   const socket = useContext(SocketContext);
-
+  const { room, currentUser } = useRoom();
+  const [username, setUsername] = currentUser
+  const [currentRoom, setCurrentRoom] = room
   const [players, setPlayers] = useState([])
 
   // let players = [
@@ -41,7 +43,8 @@ function Result() {
   
   useEffect(() => {
 
-    socket.emit('page_loaded')
+    socket.emit('page_loaded', currentRoom)
+    socket.emit('finish_game', {username, room:currentRoom})
     const url = 'https://utility-billionaire.herokuapp.com/results'
     // players.map(player => {
     //   axios.post(url, {
