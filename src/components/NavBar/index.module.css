@@ -22,9 +22,23 @@
     align-items: center;
 }
 
+.mobileNavLinksContainer {
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30vw;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+    opacity: 0.9;
+}
+
 a {
-    margin-left: 1%;
-    margin-right: 1%;
+    margin: 1%;
     text-decoration: none;
     font-family: 'Exo 2', sans-serif;
     font-size: 1.5rem;
@@ -135,6 +149,10 @@ a {
         width: 100%;
         right: 0;
         /* background-color: grey; */
+    }
+
+    a {
+        font-size: 1rem;
     }
 
 }
