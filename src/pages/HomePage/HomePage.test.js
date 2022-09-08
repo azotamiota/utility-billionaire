@@ -9,58 +9,36 @@
  import { BrowserRouter } from 'react-router-dom';
  import HomePage from '.';
 
+ const testFunc = jest.fn()
+
  describe("Home page", () => {
 
     beforeEach(() => {
         render(<BrowserRouter><HomePage /></BrowserRouter>)
     })
 
-    it("Displays a navbar with appropriate text", () => {
 
-        const navbar = screen.queryByRole("navbar");
+    it("Displays a button to join the game", async () => {
 
-        expect(navbar).toBeInTheDocument();
+        const button = screen.queryByText("Join Game");
 
-    })
-
-    it("Displays an H1 with appropriate text", () => {
-
-        const heading = screen.queryByRole("heading");
-
-        expect(heading).toBeInTheDocument();
-
-    })
-
-    it("Displays an image on the homepage.", () => {
-
-        const image = screen.queryByRole("img");
-
-        expect(image).toBeTruthy();
-
-    })
-
-    it("Displays a footer with appropriate text", () => {
-
-        const footer = screen.queryByRole("footer");
-
-        expect(footer).toBeInTheDocument();
-
-    })
-
-    it("Displays a button to join the game", () => {
-
-        const button = screen.queryByRole("button");
+        await userEvent.click(button);
+        expect(testFunc).toHaveBeenCalled()
+        // expect(testFunc).toHaveBeenCalledTimes(1)
 
         expect(button).toBeInTheDocument();
-        expect(button.getAttribute("class")).toBe("");
+    
     })
 
-    it("Displays a button to a new game", () => {
+    it("Displays a button to a new game", async () => {
 
-        const button = screen.queryByRole("button");
+        const button = screen.queryByText("Create Game");
+        await userEvent.click(button);
+        expect(testFunc).toHaveBeenCalled()
+        expect(testFunc).toHaveBeenCalledTimes(1)
 
         expect(button).toBeInTheDocument();
-        expect(button.getAttribute("class")).toBe("");
+       
     })
 
 })
