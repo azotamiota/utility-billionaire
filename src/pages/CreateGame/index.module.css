@@ -1,6 +1,6 @@
 .root {
     background-image: url("../../assets/background.jpg");
-    height: 100vh;
+    height: 80vh;  /* 100vh won't work as expected, because the navbar height is relative. That's why the actual height would be 100vh + navbar height. 80vh the approximate expected height */
     background-size: 2500px;
     padding-top: 100px;
     background-repeat: no-repeat;
@@ -11,7 +11,7 @@ label {
     width: 100%;
     font-family: 'Permanent Marker', cursive;
     color: white;
-    font-size: 1rem;
+    font-size: 1.3rem; /* I think the 1rem was too small on large screen */
     margin-bottom: 10px;
 }
 
@@ -19,7 +19,7 @@ select, input[type=text] {
     outline: none;
     color: white;
     font-family: 'Exo 2', sans-serif;
-    font-size: 0.8rem;
+    font-size: 1rem; /* I think the 0.8rem was too small on large screen */
     border: 1px solid white;
     border-radius: 10px;
     background-color: transparent;
@@ -32,8 +32,8 @@ select, input[type=text] {
 }
 
 select option {
-    color: black;
-    background-color: #82caff;
+    /* leave the default white font colour */
+    background-color: #002258; /* same colour as the bricks in the background */
 }
 
 select:focus, input[type=text]:focus {
@@ -53,7 +53,7 @@ select:focus, input[type=text]:focus {
 
 @media (min-width: 990px) {
     .root {
-        /* padding-top: 200px; */
+        padding-top: 50px;
         background-position: left;
         background-size: 4000px;
     }
