@@ -1,4 +1,5 @@
 h1 {
+    margin-block-start: 0; /* This makes the whole block more centered vertically*/
     color: #fff;
     font-family: 'Exo 2', sans-serif;
     font-size: 3rem;

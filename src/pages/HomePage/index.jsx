@@ -12,6 +12,7 @@ function HomePage() {
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
         <Title>Utility Billionaire</Title>
+        <h2 classVariant='question' style={{fontSize: '35px', marginBlockStart: '0', color: 'white'}} >Let's vanquish the energy crisis!</h2>
         <Button text="Join Game" handleClick={() => navigate("/join")} classVariant="neonText"/>
         <Button text="Create Game" handleClick={() => navigate("/create")} classVariant="neonText"/>
       </div>
