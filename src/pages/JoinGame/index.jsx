@@ -1,8 +1,10 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import { Button, Container, Input, Title } from '../../components';
-import styles from './index.module.css'
 import { SocketContext, useRoom } from '../../context'
 import { useNavigate } from 'react-router-dom';
+
+import styles from './index.module.css'
+
 function JoinGame() {
   const socket = useContext(SocketContext);
   const navigateTo = useNavigate()

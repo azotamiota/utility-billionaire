@@ -1,20 +1,19 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useContext} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 import styles from './index.module.css'
-import { Button, Container, Footer, Input, Header, Title } from '../../components'
+import { Button, Container, Input } from '../../components'
 import { SocketContext, useRoom } from '../../context'
 function CreateGame() {
 
   const [category, setCategory] = useState(17);
   const [difficulty, setDifficulty] = useState('easy');
 
- const { room, players, currentUser } = useRoom();
+ const { room, currentUser } = useRoom();
   const [currentRoom, setCurrentRoom] = room
   const [username, setUsername] = currentUser
 
-  // const { data, setData } = useQuestions()
   const navigateTo = useNavigate()
   const socket = useContext(SocketContext);
   const topics = [
@@ -39,10 +38,7 @@ function CreateGame() {
   const startGame = (e) => {
     e.preventDefault()
     async function searchApi() {
-      console.log(difficulty, category)
       const result = await axios.get(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`);
-      // setData(result.data.results)
-      console.log(username, currentRoom)
       socket.emit('send_question', {room: currentRoom, questions: result.data.results})
       socket.emit('join_room',  {username, room: currentRoom})
     }
@@ -52,7 +48,6 @@ function CreateGame() {
 
   return (
     <div className={styles.root}>
-      {/* <Title>Create your utility billionaire game!</Title> */}
       <Container>
         <Input type='select' classVariant='light' name='category' defaultValue={topics} onChange={(e) => setCategory(e.target.value)}>Category</Input>
         <Input type='select' classVariant='light' name='difficulty' defaultValue={levels} onChange={(e) => setDifficulty(e.target.value)}>Difficulty</Input>

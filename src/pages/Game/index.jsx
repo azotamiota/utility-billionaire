@@ -2,26 +2,26 @@ import React, {useState, useContext, useEffect, useRef, useReducer} from 'react'
 import { useNavigate } from 'react-router-dom';
 import useSound from "use-sound";
 
-import styles from './index.module.css'
-import { Button, Container, Message, Title, TotalMoney, Timer } from '../../components'
+import { Button, Container, Title, TotalMoney, Timer } from '../../components'
 import rightAnswer from "../../../assets/sounds/correct.mp3"
 import wrongAnswer from "../../../assets/sounds/wrong.mp3"
 import { useQuestions, SocketContext, useRoom } from '../../context';
 
+import styles from './index.module.css'
 
 function Game() {
   
   const socket = useContext(SocketContext)
   const { room, players, currentUser } = useRoom();
-  const [currentRoom, setCurrentRoom] = room
-  const [currentPlayers, setCurrentPlayers] = players
-  const [username, setUsername] = currentUser
+  const [currentRoom, ] = room
+  const [currentPlayers, ] = players
+  const [username, ] = currentUser
   
   const { data } = useQuestions()
   const currentAnswer = useRef('')
+  const answerChosen = useRef('none')
   const [randomisedAnswerList, setRandomisedAnswerList] = useState([])
   const [questionNumber, setQuestionNumber] = useState(0);
-  const answerChosen = useRef('none')
   const [revealAnswer, setRevealAnswer] = useState(false)
   const [message, setMessage] = useState('');
   const [currentMoney, setCurrentMoney] = useState(0)
@@ -30,16 +30,16 @@ function Game() {
   const [wrongSound] = useSound(wrongAnswer, {volume: 0.20})
   const money =
       [
-        { id: 1, amount: 25 },
-        { id: 2, amount: 50 },
-        { id: 3, amount: 100 },
-        { id: 4, amount: 1500 },
-        { id: 5, amount: 3000},
-        { id: 6, amount: 6000 },
-        { id: 7, amount: 12500 },
-        { id: 8, amount: 25000 },
-        { id: 9, amount: 50000 },
-        { id: 10, amount: 100000 }
+        { id: 1, amount: 250 },
+        { id: 2, amount: 500 },
+        { id: 3, amount: 1000 },
+        { id: 4, amount: 2000 },
+        { id: 5, amount: 4000},
+        { id: 6, amount: 8000 },
+        { id: 7, amount: 16000 },
+        { id: 8, amount: 40000 },
+        { id: 9, amount: 100000 },
+        { id: 10, amount: 1000000 }
       ]
   const [, forceUpdate] = useReducer(x => x + 1, 0)
   const navigate = useNavigate()
@@ -70,8 +70,7 @@ function Game() {
 
   
   useEffect(() => {
-    if (questionNumber === 9) {
-      console.log('this is the last wuestion and we emit: ', {currentMoney, currentRoom, currentPlayers, username})
+    if (questionNumber === 10) {
       socket.emit('send_result', {currentMoney, currentRoom, currentPlayers, username})
         navigate('/result')
     }
@@ -115,13 +114,12 @@ function Game() {
   }
 
   const handleClick = (e, index, answer) => {
-    console.log('button has clicked')
     e.preventDefault()
-    // e.target.style.backgroundColor = 'red'
     currentAnswer.current = answer
     answerChosen.current = index
     forceUpdate()
   }
+
   useEffect(() => {
     setRandomisedAnswerList([...data[questionNumber].incorrect_answers, ' ' + data[questionNumber].correct_answer + ' '].sort(() => Math.random() - 0.5))
   }, [questionNumber])

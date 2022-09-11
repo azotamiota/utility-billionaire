@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState } from 'react'
+import React, {useContext, useEffect } from 'react'
 import styles from './index.module.css'
 
 import { Button, Container, UserCard, Title } from "../../components"
@@ -13,17 +13,14 @@ function WaitingRoom() {
  
  
  const socket = useContext(SocketContext);
-
   const navigateTo = useNavigate()
+
   socket.on('joined', (incoming) => {
     const arr = []
     for (let player of incoming.players) {
       arr.push(player.username)
-      console.log(player)
     }
-    console.log(incoming.questions[0].questions)
     setData(incoming.questions[0].questions)
-    console.log(data)
     setCurrentPlayers(arr)
   })
   socket.on('begin', () => {
@@ -31,7 +28,6 @@ function WaitingRoom() {
   })
 
   const startGame = () => {
-    console.log("this should start the game!", room)
     socket.emit('start_game', room[0])
   }
   useEffect(() => {

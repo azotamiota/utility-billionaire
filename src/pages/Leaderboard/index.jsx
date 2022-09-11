@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+
 import {Container, UserCard, Title} from '../../components'
 import styles from './index.module.css'
 
@@ -21,7 +22,6 @@ function Leaderboard() {
   <div className={styles.leaderboarddiv}>
     <Container>
       <Title>Leaderboard:</Title>
-      {console.log('leaderboard: ', leaderboard)}
       {leaderboard && <UserCard currentPlayers={leaderboard.slice(0, 11)}/>}
     </Container>
   </div>

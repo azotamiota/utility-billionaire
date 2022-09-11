@@ -1,25 +1,20 @@
 import React, { useEffect, useContext, useState } from 'react'
-import { Container, Title, UserCard } from '../../components';
-import styles from './index.module.css'
-import axios from 'axios'
-// import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
+import axios from 'axios'
+
+import { Container, Title, UserCard } from '../../components';
 import { SocketContext, useRoom } from '../../context'
+
+import styles from './index.module.css'
 
 function Result() {
 
   const socket = useContext(SocketContext);
   const { room, currentUser } = useRoom();
-  const [username, setUsername] = currentUser
-  const [currentRoom, setCurrentRoom] = room
+  const [username, ] = currentUser
+  const [currentRoom, ] = room
   const [players, setPlayers] = useState([])
 
-  // let players = [
-  //   // { id: 1, username: 'Falkon', score: 600},
-  //   // { id: 2, username: 'Gonzo', score: 300},
-  //   // { id: 3, username: 'Rat234', score: 60},
-  //   // { id: 4, username: 'FatBee34', score: 100},
-  // ]
   function sortByKey(array, key) {
     return players.sort(function(a, b) {
         const x = a[key]; const y = b[key];
@@ -28,10 +23,7 @@ function Result() {
   }
 
   socket.on('final_scores', data => {
-    console.log('final results are coming in: ', data);
-    // console.log('players before: ', players);
     setPlayers(data)
-    // console.log('players after: ', players);
   })
 
 
