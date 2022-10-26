@@ -43,7 +43,7 @@
 
     it("Gets the leaderboard", async () => {
         
-        const leaderboard = await axios.get('https://utility-billionaire.herokuapp.com/leaderboard')
+        const leaderboard = await axios.get('http://ec2-18-130-121-240.eu-west-2.compute.amazonaws.com:5000/leaderboard')
         
         expect(leaderboard).toContain("/leaderboard")
     })

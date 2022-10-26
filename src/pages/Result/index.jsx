@@ -28,7 +28,7 @@ function Result() {
 
 
   useEffect(() => {
-    const url = 'https://utility-billionaire.herokuapp.com/results'
+    const url = 'http://ec2-18-130-121-240.eu-west-2.compute.amazonaws.com:5000/results'
     console.log('players before sending to database:', players)
     players.map(player => {
       axios.post(url, {

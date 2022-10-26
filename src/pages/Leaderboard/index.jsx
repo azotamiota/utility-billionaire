@@ -9,7 +9,7 @@ function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState(null)
 
   const fetchUsers = async () => {
-    const fetchedUsers = await axios.get('https://utility-billionaire.herokuapp.com/leaderboard')
+    const fetchedUsers = await axios.get('http://ec2-18-130-121-240.eu-west-2.compute.amazonaws.com:5000/leaderboard')
     const sortedUsers = fetchedUsers.data.users.sort((a, b) => b.score - a.score)
     setLeaderboard(sortedUsers)
   }
