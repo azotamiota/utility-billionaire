@@ -66,6 +66,7 @@ function Game() {
       'If you have to pay mortgage, start to worry, mate!',
       'Intermittent fasting is coming: One month eating, one month starving.',
       'Buy a thick coat before winter. Your bedroom will be like an igloo',
+      'Start eating beans to produce gas for heating'
       ]
 
   
@@ -90,7 +91,7 @@ function Game() {
   
   const timeOut = () => {
     if (answerChosen.current !== 'none') {
-      if (currentAnswer.current.trim() !== currentAnswer.current) { // this is how the program distinguish which one is the correct answer. See explanation below in comments
+      if (currentAnswer.current.trim() !== currentAnswer.current) { 
         correct()
       } else {
         wrong()
