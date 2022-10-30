@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom"
 
 import { HomePage, CreateGame, JoinGame, WaitingRoom, Game, Result, Leaderboard, NotFound } from "./pages"
-import { Header, Footer, NavBar } from "./components"
+import { Footer, NavBar } from "./components"
 import { QuestionsProvider, RoomProvider, SocketProvider } from "./context";
 const App = () => {
     return <QuestionsProvider>
