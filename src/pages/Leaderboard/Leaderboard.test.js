@@ -43,7 +43,7 @@
 
     it("Gets the leaderboard", async () => {
         
-        const leaderboard = await axios.get('http://ec2-18-130-121-240.eu-west-2.compute.amazonaws.com:5000/leaderboard')
+        const leaderboard = await axios.get('http://3.9.179.129:49160/leaderboard')
         
         expect(leaderboard).toContain("/leaderboard")
     })
